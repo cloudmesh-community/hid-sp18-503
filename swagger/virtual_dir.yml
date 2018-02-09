@@ -75,6 +75,18 @@ paths:
             $ref: "#/definitions/Dir"
 
 definitions:
+  File:
+    type: 'object'
+    required:
+      - 'name'
+    properties:
+      name:
+        type: 'string'
+      parent_directory:
+        type: 'string'
+      endpoint:
+        type: 'string'
+
   Dir:
     type: 'object'
     required:
@@ -88,15 +100,3 @@ definitions:
         type: 'array'
         items:
           $ref: "#/definitions/File"
-
-  File:
-    type: 'object'
-    required:
-      - 'name'
-    properties:
-      name:
-        type: 'string'
-      parent_directory:
-        type: 'string'
-      endpoint:
-        type: 'string'

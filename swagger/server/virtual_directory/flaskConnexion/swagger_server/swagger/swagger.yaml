@@ -68,6 +68,21 @@ paths:
             $ref: "#/definitions/Dir"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
+  File:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+      parent_directory:
+        type: "string"
+      endpoint:
+        type: "string"
+    example:
+      endpoint: "endpoint"
+      name: "name"
+      parent_directory: "parent_directory"
   Dir:
     type: "object"
     required:
@@ -91,18 +106,3 @@ definitions:
       - endpoint: "endpoint"
         name: "name"
         parent_directory: "parent_directory"
-  File:
-    type: "object"
-    required:
-    - "name"
-    properties:
-      name:
-        type: "string"
-      parent_directory:
-        type: "string"
-      endpoint:
-        type: "string"
-    example:
-      endpoint: "endpoint"
-      name: "name"
-      parent_directory: "parent_directory"
