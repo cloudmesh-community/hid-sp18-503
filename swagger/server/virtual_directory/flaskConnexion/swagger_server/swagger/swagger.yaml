@@ -15,12 +15,25 @@ consumes:
 produces:
 - "application/json"
 paths:
+  /dirs:
+    get:
+      description: "Returns a list of all directories"
+      operationId: "dirs_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "a list of Dirs"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Dir"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
   /dir/{dir_name}:
     get:
-      tags:
-      - "default_controller"
       description: "Returns a list of files in the directory dir_name"
-      operationId: "controllers.default_controller.get_dir_by_id"
+      operationId: "get_dir_by_id"
       produces:
       - "application/json"
       parameters:
@@ -36,11 +49,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/File"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
     post:
-      tags:
-      - "default_controller"
       description: "create/update a directory with the directory name dir_name"
-      operationId: "controllers.default_controller.create_dir"
+      operationId: "create_dir"
       produces:
       - "application/json"
       parameters:
@@ -54,23 +66,23 @@ paths:
           description: "directory created/updated"
           schema:
             $ref: "#/definitions/Dir"
-  /dirs:
-    get:
-      tags:
-      - "default_controller"
-      description: "Returns a list of all directories"
-      operationId: "controllers.default_controller.dirs_get"
-      produces:
-      - "application/json"
-      parameters: []
-      responses:
-        200:
-          description: "a list of Dirs"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Dir"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
+  File:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+      parent_directory:
+        type: "string"
+      endpoint:
+        type: "string"
+    example:
+      endpoint: "endpoint"
+      name: "name"
+      parent_directory: "parent_directory"
   Dir:
     type: "object"
     required:
@@ -84,14 +96,13 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/File"
-  File:
-    type: "object"
-    required:
-    - "name"
-    properties:
-      name:
-        type: "string"
-      parent_directory:
-        type: "string"
-      endpoint:
-        type: "string"
+    example:
+      name: "name"
+      parent_directory: "parent_directory"
+      files:
+      - endpoint: "endpoint"
+        name: "name"
+        parent_directory: "parent_directory"
+      - endpoint: "endpoint"
+        name: "name"
+        parent_directory: "parent_directory"
