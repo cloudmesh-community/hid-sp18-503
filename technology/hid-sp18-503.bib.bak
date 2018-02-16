@@ -1,0 +1,26 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF-8
+
+
+@Misc{hid-sp18-503-Edgent,
+  Author                   = {Edgent},
+  HowPublished             = {Apache edgent website},
+  Year                     = {2017},
+
+  Owner                    = {arnav},
+  Timestamp                = {2018.02.16},
+  Url                      = {http://edgent.apache.org/}
+}
+
+@Misc{hid-sp18-503-edgent-docs,
+  Title                    = {Apache Edgent Documentation},
+
+  Author                   = {Apache Edgent},
+  HowPublished             = {Apache Edgent Website},
+  Year                     = {2017},
+
+  Owner                    = {arnav},
+  Timestamp                = {2018.02.16},
+  Url                      = {http://edgent.apache.org/docs/home.html}
+}
+
