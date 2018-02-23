@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "A REST service that allows to create read and update a virtual directory\n"
-  version: "0.0.1"
+  version: "0.0.2"
   title: "Virtual Directory REST Service Using Swagger"
   contact:
     name: "Cloudmesh virtual directory REST service"
@@ -48,7 +48,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/File"
+              type: "string"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
     post:
       description: "create/update a directory with the directory name dir_name"
@@ -79,10 +79,6 @@ definitions:
         type: "string"
       endpoint:
         type: "string"
-    example:
-      endpoint: "endpoint"
-      name: "name"
-      parent_directory: "parent_directory"
   Dir:
     type: "object"
     required:
@@ -95,14 +91,10 @@ definitions:
       files:
         type: "array"
         items:
-          $ref: "#/definitions/File"
+          type: "string"
     example:
       name: "name"
       parent_directory: "parent_directory"
       files:
-      - endpoint: "endpoint"
-        name: "name"
-        parent_directory: "parent_directory"
-      - endpoint: "endpoint"
-        name: "name"
-        parent_directory: "parent_directory"
+      - "files"
+      - "files"

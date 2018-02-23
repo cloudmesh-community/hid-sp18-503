@@ -6,7 +6,6 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
-java.io.File  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -24,12 +23,12 @@ class Dir(Model):
         :param parent_directory: The parent_directory of this Dir.  # noqa: E501
         :type parent_directory: str
         :param files: The files of this Dir.  # noqa: E501
-        :type files: List[File]
+        :type files: List[str]
         """
         self.swagger_types = {
             'name': str,
             'parent_directory': str,
-            'files': List[File]
+            'files': List[str]
         }
 
         self.attribute_map = {
@@ -103,7 +102,7 @@ class Dir(Model):
 
 
         :return: The files of this Dir.
-        :rtype: List[File]
+        :rtype: List[str]
         """
         return self._files
 
@@ -113,7 +112,7 @@ class Dir(Model):
 
 
         :param files: The files of this Dir.
-        :type files: List[File]
+        :type files: List[str]
         """
 
         self._files = files
