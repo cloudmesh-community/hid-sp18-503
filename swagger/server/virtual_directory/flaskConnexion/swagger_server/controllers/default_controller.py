@@ -2,9 +2,11 @@ import connexion
 import six
 
 from swagger_server.models.dir import Dir  # noqa: E501
-java.io.File  # noqa: E501
 from swagger_server import util
+from pymongo import MongoClient
 
+client = MongoClient('localhost',27017)
+db = client.rest_db
 
 def create_dir(dir_name):  # noqa: E501
     """create_dir
@@ -16,6 +18,7 @@ def create_dir(dir_name):  # noqa: E501
 
     :rtype: Dir
     """
+    # post request
     return 'do some magic!'
 
 
@@ -27,7 +30,15 @@ def dirs_get():  # noqa: E501
 
     :rtype: List[Dir]
     """
-    return 'do some magic!'
+    dirs = db.dirs.find()
+    arr = []
+    for d in dirs:
+        name = d["dir_name"]
+        parent_dir =  d["parent_dir"] if 'parent_dir' in d else None
+        files = d['files'] if 'files' in d else []
+        obj = Dir(name = name, parent_directory = parent_dir, files = files)
+        arr.append(obj)
+    return arr
 
 
 def get_dir_by_id(dir_name):  # noqa: E501
@@ -38,6 +49,15 @@ def get_dir_by_id(dir_name):  # noqa: E501
     :param dir_name: name of the directory to fetch
     :type dir_name: str
 
-    :rtype: List[File]
+    :rtype: List[str]
     """
-    return 'do some magic!'
+    # get request
+    directory = db.dirs.find_one({'dir_name': dir_name})
+    if directory:
+        name = directory['dir_name']
+        parent_dir = directory['parent_dir'] if 'parent_dir' in directory else None
+        files = directory['files'] if 'files' in directory else []
+        obj = Dir(name = name, parent_directory = parent_dir, files = files)
+        return obj
+    else:
+        return "Object Not Found"
