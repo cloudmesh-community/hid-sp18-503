@@ -10,12 +10,19 @@
   The last part (p1 or 1 respectively) is the partition number.
 * Note down the name of the sd card (without the partition)
 * Unmount the card so that the card can not be read from or written to
-* Run ```unmount dev/mmcblk0p1``` (use correct name for the card)
+* Run 
+
+```unmount dev/mmcblk0p1``` 
+
+  Make sure to use correct name for the card
 * If your card has multiple partitions unmount all partitions
 * Next write the image to the sd card.
-* Run ```dd bs=4M if=<path to .img> of=/dev/mmcblk0 status=progress conv=fsunc```
-* Make sure ```if=``` contains the path to image and
-```of=``` contains the name of the sd card otherwise you may ruin your hard disk
+* Run 
+
+  ```dd bs=4M if=<path to .img> of=/dev/mmcblk0 status=progress conv=fsunc```
+  
+  Make sure ```if=``` contains the path to image and ```of=``` contains the name 
+  of the sd card otherwise you may ruin your hard disk
 
 ### Checking that the image was written properly
 
