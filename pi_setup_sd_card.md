@@ -12,7 +12,7 @@
 * Unmount the card so that the card can not be read from or written to
 * Run 
 
-```unmount dev/mmcblk0p1``` 
+  ```unmount dev/mmcblk0p1``` 
 
   Make sure to use correct name for the card
 * If your card has multiple partitions unmount all partitions
