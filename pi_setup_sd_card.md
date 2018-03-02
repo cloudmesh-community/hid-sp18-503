@@ -20,9 +20,17 @@
 ### Checking that the image was written properly
 
 * Dreate an image again from the sd card
-* Run ```dd bs=4M if=/dev/sdX of=from-sd-card.img```
+* Run 
+
+  ```dd bs=4M if=/dev/sdX of=from-sd-card.img```
+  
 * Truncate the image to be the the same size as that of the raspbian image
+
   ```truncate --reference <original raspbian image> from-sd-card.img```
+  
 * Run diff to see if the two files are same
-* Run ```diff -s from-sd-card.img <odiginal raspbian image>```
+* Run 
+
+  ```diff -s from-sd-card.img <odiginal raspbian image>```
+  
 * Diff should say that the two files are same
