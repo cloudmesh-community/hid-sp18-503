@@ -1,4 +1,4 @@
-## Writing image on an sd card on Linux (ubuntu 16.04)
+## Create a Raspian SD-Card from a Ubuntu Machine
 
 * In the file explorer, right clichk on the sd card and format the sd card
 * Run ```df -h``` to list all the drives in the computer
