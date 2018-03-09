@@ -17,3 +17,8 @@
   directory
 
        make clean
+
+```python
+def a(0):
+  hhh = 1
+```
