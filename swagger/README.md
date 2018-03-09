@@ -18,7 +18,3 @@
 
        make clean
 
-fhjfsdhkjfsd
-
-    def a(0):
-      hhh = 1
