@@ -9,6 +9,7 @@ all:
 		-D supportPython2=true
 
 	cp default_controller.py server/virtual_directory/flaskConnexion/swagger_server/controllers/default_controller.py  
+	#cp *_controller.py server/virtual_directory/flaskConnexion/swagger_server/controllers/  
 
 run:
 	cd server/virtual_directory/flaskConnexion/ &&\
