@@ -21,6 +21,7 @@ run:
 	python -m swagger_server
 
 requirements:
+	pip install -r requirements.txt
 	cd server/virtual_directory/flaskConnexion; pip install -r requirements.txt
 
 clean:
