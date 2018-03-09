@@ -13,7 +13,7 @@ info:
     name: 'Apache'
 
 host: 'localhost:8080'
-basePath: '/api'
+basePath: '/cloudmesh/virtualdirectory'
 
 schemes:
   - 'http'
