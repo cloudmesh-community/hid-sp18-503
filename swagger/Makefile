@@ -4,11 +4,10 @@
 SWAGGER=${swagger_codegen}
 SPEC=virtual_dir_v3.yml
 
-all: generate run
+all: generate requirements run
 	@echo "DONE"
 
 generate:
-
 	$(SWAGGER) generate \
 		-i $(SPEC) \
 		-l python-flask \
@@ -20,6 +19,9 @@ generate:
 run:
 	cd server/virtual_directory/flaskConnexion/ &&\
 	python -m swagger_server
+
+requirements:
+	cd server/virtual_directory/flaskConnexion; pip install -r requirements.txt
 
 clean:
 	rm -rf server/
