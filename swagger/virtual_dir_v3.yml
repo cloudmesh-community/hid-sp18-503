@@ -1,0 +1,109 @@
+# swagger service for virtual directory
+---
+swagger: '2.0'
+info:
+  version: '0.0.3'
+  title: 'Virtual Directory REST Service Using Swagger'
+  description: >
+    A REST service that allows to create
+    read and update a virtual directory
+  contact:
+    name: 'Cloudmesh virtual directory REST service'
+  license:
+    name: 'Apache'
+
+host: 'localhost:8080'
+basePath: '/api'
+
+schemes:
+  - 'http'
+consumes:
+  - 'application/json'
+produces:
+  - 'application/json'
+
+paths:
+  '/dirs':
+    get:
+      description: "Returns a list of all directories"
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'a list of Dirs'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Dir'
+
+  '/dir/{dir_name}':
+    get:
+      description: "Returns a list of files in the directory dir_name"
+      produces:
+        - 'application/json'
+      operationId: getDirById
+      parameters:
+        - name: dir_name
+          in: path
+          description: 'name of the directory to fetch'
+          required: true
+          type: string
+      responses:
+        200:
+          description: "A list of files"
+          schema:
+            type: 'array'
+            items:
+              type: 'string'
+              # $ref: '#/definitions/File'
+              # $ref: '#/definitions/Dir'
+
+    post:
+      description: 'create/update a directory with the directory name dir_name'
+      operationId: createDir
+      produces:
+        - 'application/json'
+      parameters:
+        - name: dir_name
+          in: path
+          required: true
+          type: string
+          
+        - in: body
+          name: body
+          description: 'name of the directory to be created'
+          schema:
+            $ref: '#/definitions/Dir'
+
+      responses:
+        201:
+          description: 'directory created/updated'
+          schema:
+            $ref: "#/definitions/Dir"
+
+definitions:
+  File:
+    type: 'object'
+    required:
+      - 'name'
+    properties:
+      name:
+        type: 'string'
+      parent_directory:
+        type: 'string'
+      endpoint:
+        type: 'string'
+
+  Dir:
+    type: 'object'
+    required:
+      - "name"
+    properties:
+      name:
+        type: 'string'
+      parent_directory:
+        type: 'string'
+      files:
+        type: 'array'
+        items:
+          type: 'string'

@@ -2,10 +2,12 @@
 swagger: "2.0"
 info:
   description: "A REST service that allows to create read and update a virtual directory\n"
-  version: "0.0.2"
+  version: "0.0.3"
   title: "Virtual Directory REST Service Using Swagger"
   contact:
     name: "Cloudmesh virtual directory REST service"
+  license:
+    name: "Apache"
 host: "localhost:8080"
 basePath: "/api"
 schemes:
@@ -58,9 +60,14 @@ paths:
       parameters:
       - name: "dir_name"
         in: "path"
-        description: "name of the directory to be created"
         required: true
         type: "string"
+      - in: "body"
+        name: "body"
+        description: "name of the directory to be created"
+        required: false
+        schema:
+          $ref: "#/definitions/Dir"
       responses:
         201:
           description: "directory created/updated"
