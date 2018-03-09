@@ -18,7 +18,7 @@
 
        make clean
 
-```python
-def a(0):
-  hhh = 1
-```
+fhjfsdhkjfsd
+
+    def a(0):
+      hhh = 1
