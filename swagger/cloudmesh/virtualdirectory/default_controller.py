@@ -5,7 +5,7 @@ from swagger_server.models.dir import Dir  # noqa: E501
 from swagger_server import util
 from pymongo import MongoClient
 
-client = MongoClient('localhost',27017)
+client = MongoClient('localhost', 27017)
 db = client.rest_db
 
 def create_dir(dir_name, body=None):  # noqa: E501
