@@ -13,7 +13,6 @@ generate:
 		-l python-flask \
 		-o server/virtual_directory/flaskConnexion \
 		-D supportPython2=true
-
 	cp *_controller.py server/virtual_directory/flaskConnexion/swagger_server/controllers/  
 
 run:
