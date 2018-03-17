@@ -20,27 +20,34 @@ This tutorial explores testing for python.
 The travis.yml file describes to travis, which language is used, what environments to test the code on, and to install any dependencies that may be required.
 
 * The first line of the yml file specifies the language used
+
 ```
 language: python
 ```
+
 * Next we need to specify the versions of python we need to test the code for.
   Here we need to specify the versions in the same manner as we use to
   install the language, as travis creates a virtual environment for each of
   these versions.
+  
   ```
   python:
     - 3.6.4
   ```
+
 * Dependencies can be specified in the yml file under using he ```install:```
   tag. It is recommended that the dependencies be installed using pip as travis
   creates a virtual environment for each python version.
+  
   ```
   install:
     - pip install -r requirements.txt
   ```    
+
 * If tests should be perfrmed for different versions of libraries,
   such as django for each python version, then ```env:``` tag can be used
   along with the ```install``` tag.
+  
   ```
   env:
     - django_version=1.10
@@ -48,10 +55,12 @@ language: python
   install:
     - pip install Django==$django_version
   ```
+
 * finally to specify what commands to execute to run the tests,
   we use the ```script:``` tag. If a makefile is used for this purpose,
   this can be done a follows however travis allows the use of pytest for
   this pupose as well.
+
   ```
        script: make test
   ```
