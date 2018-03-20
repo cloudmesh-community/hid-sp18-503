@@ -2,7 +2,7 @@
 # the path to swagger codegen jarfile
 
 SWAGGER=${swagger_codegen}
-SPEC=virtual_dir_v3.yml
+SPEC=virtual_dir_v0_0_3.yml
 
 all: generate requirements run
 	@echo "DONE"
