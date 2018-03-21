@@ -74,7 +74,7 @@ language: python
     - mongodb
   ```
   
-  To show, and keep track of the build status of the repository, travis allows users to add build status
+* To show, and keep track of the build status of the repository, travis allows users to add build status
   badges in the markdown file. Once a test is complete, click on the badge on the travis page, and
   select markdown. Then copy the markdown code and add it to the required markdown file.
   On subsequent pushes to the repository, this status keeps updating.
