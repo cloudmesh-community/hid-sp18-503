@@ -7,6 +7,7 @@ install:
 	wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar -O swagger-codegen-cli.jar && \
 	export swagger_codegen="java -jar swagger-codegen-cli.jar" && \
 	make generate && \
+	make requirements && \
 	pip install -r server/virtual_directory/flaskConnexion/test-requirements.txt
 test:
 	pytest
