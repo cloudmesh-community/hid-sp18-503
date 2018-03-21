@@ -15,9 +15,9 @@ This tutorial explores testing for python.
   travis website
 * Go to github and locally clone the repository.
 
-### The travis.yml file
+### The .travis.yml file
 
-The travis.yml file describes to travis, which language is used, what environments to test the code on, and to install any dependencies that may be required.
+The .travis.yml file describes to travis, which language is used, what environments to test the code on, and to install any dependencies that may be required.
 
 * The first line of the yml file specifies the language used
 
