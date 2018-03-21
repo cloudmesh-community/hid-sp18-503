@@ -8,8 +8,9 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.rest_db
 
+"""
 def create_dir(dir_name, body=None):  # noqa: E501
-    """create_dir
+    create_dir
 
     create/update a directory with the directory name dir_name # noqa: E501
 
@@ -17,7 +18,7 @@ def create_dir(dir_name, body=None):  # noqa: E501
     :type dir_name: str
 
     :rtype: Dir
-    """
+    
     if connexion.request.is_json:
         body = Dir.from_dict(connexion.request.get_json())  # noqa: E501
 
@@ -33,7 +34,7 @@ def create_dir(dir_name, body=None):  # noqa: E501
     
     return body
                                                 
-
+"""
 
 def dirs_get():  # noqa: E501
     """dirs_get
