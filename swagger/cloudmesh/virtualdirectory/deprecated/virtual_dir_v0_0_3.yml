@@ -57,6 +57,30 @@ paths:
               type: 'string'
               # $ref: '#/definitions/File'
               # $ref: '#/definitions/Dir'
+
+    post:
+      description: 'create/update a directory with the directory name dir_name'
+      operationId: createDir
+      produces:
+        - 'application/json'
+      parameters:
+        - name: dir_name
+          in: path
+          required: true
+          type: string
+          
+        - in: body
+          name: body
+          description: 'name of the directory to be created'
+          schema:
+            $ref: '#/definitions/Dir'
+
+      responses:
+        201:
+          description: 'directory created/updated'
+          schema:
+            $ref: "#/definitions/Dir"
+
 definitions:
   File:
     type: 'object'
