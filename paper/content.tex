@@ -33,15 +33,14 @@ app-centric services.
 
 %% kaafi images
 \section{Introduction}
-
 With the increasing competition in the industry, fast delivery of
 services to users is one of the major concerns. Starting up services
 with traditional cloud Infrastructure as a Service (IaaS) platforms
 can be challenging since bulk of the work needed to set up and deploy
 an application is left for the user. With the increase in application
 centric cloud computing, the developers do not need to worry about all
-of the networking issues~\cite{bmc-app-centric}. An application centric
-cloud computing environment abstracts away the complexities of
+of the networking issues~\cite{bmc-app-centric}. An application
+centric cloud computing environment abstracts away the complexities of
 different cloud environments, allowing the developers need to manage
 specific tasks related to the application and not the individual
 servers themselves, thus enabling developers to spend more time to
@@ -64,8 +63,9 @@ solution for cloud based application that is easy to scale. Milagro
 consists of Milagro Crypto Library (MCL) that allows users to
 establish distributed trust systems using proven and tested
 propocols. Applications can then build on MCL and provide multifactor
-authentication using Milagro MFA, secure communications and maintain
-ledgers for security~\cite{milagro-docs-overview}.
+authentication using Milagro MFA, secure communications between a
+client and a server and also in peer to peer
+comunication~\cite{milagro-docs-overview}.
 
 
 
@@ -92,7 +92,7 @@ the case of stuxnet~\cite{securityweek-ssl-threats}. Encryption makes
 initiating an SSL connection a heavyweight process and thus SSl
 prottected services are susceptible to attacks such as Denial of
 Servics (DoS) and Distributed Denial of Service (DDoS). Many such
-attacks on PKI hvae been listed in ~\cite{cacert-wiki-pki-history}.
+attacks on PKI hvae been listed in~\cite{cacert-wiki-pki-history}.
 Many commercial PKI services use Identity certificates to sidestep the
 concern whether a commercial CA actualy had the authority to provide
 certificates, and leave it to the users to verify the actual
@@ -114,15 +114,39 @@ problems can be avoided by adopting a decentralized approach.
 
 
 \section{Milagro Details}
-% why milagro
-% how it works
-% shared keys, d-ta and stuff
-% extend trust as needed
-% revoke trust
+% more on elliptic curve pairing -- medium
+Milagro uses cryptography techniques based on pairing on ellipic
+curves. Elliptic curves are mathematical structures on which
+operations are easily defined. Muliplication of a point on a curve to
+a number can be easily computed, but it is computationally difficult
+to find the multiplier even if the result is known. This makes it
+difficult to break the system while using smaller multipliers as
+compared to RSA based encryption which requires generation of large
+prime numbers~\cite{milagro-concepts}. This removes the need to
+maintain and distribute certificates, thus eliminating the need for a
+centralized certificate authority.
 
-\section{Miracl}
-% details on miracl
+Apache milagro uses pairing based cryptography (PBC) to split a users
+key among different distributed trust authorities (D-TAs) and provides
+additional security as the D-TAs are isolated and idependent of each
+other. This eliminates a single point of failure, and allows the key
+generation and distribution to be a part of the system itself. Apache
+milagro provides Identity Based Encryption (IBE) where a users key can
+be set to a predefined identifier, and ero knowledge authentication,
+where the identity of a user can be proved without showing the user's
+key.  These cryptographic operations are handled by the
+MCL~\cite{milagro-concepts}.
+
+\section{Milagro Crypto Library}
+% important features of mcl
+% particular things it implements
+% hoe it implements the stuff
 % how it is used in milagro
+
+\section{Milagro MFA}
+% how it works
+% how it builds on mcl
+% different sdks available
 
 \section{Milagro TLS}
 % perfect forward secrecy
@@ -130,10 +154,15 @@ problems can be avoided by adopting a decentralized approach.
 % using Milagro auth for peer to peer security
 % how it works
 
-\section{case study} % future work
+%\section{case study} % future work
 % uk tax office user identity assurance
 % etc
 \section{conclusion}
+
+%\begin{figure}[!ht]
+%  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
+%  \caption{Example caption}\label{f:fly}
+%\end{figure}
 
 \begin{acks}
 
@@ -141,12 +170,6 @@ problems can be avoided by adopting a decentralized approach.
   support and suggestions to write this paper.
 
 \end{acks}
-
-\section{figures}
-%\begin{figure}[!ht]
-%  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
-%  \caption{Example caption}\label{f:fly}
-%\end{figure}
 
 
 
