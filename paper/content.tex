@@ -34,11 +34,39 @@ app-centric services.
 %% kaafi images
 \section{Introduction}
 
-%shift towards app centric services
-%more connected devices
-% why MFA is needed
-%apache milagro solution
-%Miracl, MFA, TLS intro
+With the increasing competition in the industry, fast delivery of
+services to users is one of the major concerns. Starting up services
+with traditional cloud Infrastructure as a Service (IaaS) platforms
+can be challenging since bulk of the work needed to set up and deploy
+an application is left for the user. With the increase in application
+centric cloud computing, the developers do not need to worry about all
+of the networking issues~\cite{bmc-app-centric}. An application centric
+cloud computing environment abstracts away the complexities of
+different cloud environments, allowing the developers need to manage
+specific tasks related to the application and not the individual
+servers themselves, thus enabling developers to spend more time to
+improve the overall user experience. Most IoT applications benefit
+from application centric clouds as the connected devices are part of a
+common application~\cite{vb-app-centric}.
+
+In view of this, it is important to ensure security in the cloud. With
+most of the services using password based authentication, which is
+inherently vulnerable, it is important to use other information to
+authenticate users properly. Multi Factor Authentication (MFA) allows
+users to establish their identity by providing evidence for two out of
+three requirements- knowledge (something the user knows), posession
+(something the user has) and inherence (something the user
+is)~\cite{centrify-mfa}.
+
+Apache Milagro~\cite{milagro-website} is an apache incubator project
+that provides an open source, distributd, certificate less security
+solution for cloud based application that is easy to scale. Milagro
+consists of Milagro Crypto Library (MCL) that allows users to
+establish distributed trust systems using proven and tested
+propocols. Applications can then build on MCL and provide multifactor
+authentication using Milagro MFA, secure communications and maintain
+ledgers for security~\cite{milagro-docs-overview}.
+
 
 
 \section{Problems with PKI}
@@ -65,6 +93,10 @@ initiating an SSL connection a heavyweight process and thus SSl
 prottected services are susceptible to attacks such as Denial of
 Servics (DoS) and Distributed Denial of Service (DDoS). Many such
 attacks on PKI hvae been listed in ~\cite{cacert-wiki-pki-history}.
+Many commercial PKI services use Identity certificates to sidestep the
+concern whether a commercial CA actualy had the authority to provide
+certificates, and leave it to the users to verify the actual
+identity~\cite{ten-pki-risks}.
 
 Most password protected services rely on PKI and SSL to send passwords
 over the internet. Recording passwords on a server is another problem
@@ -72,7 +104,7 @@ as password servers can be attacked and passwords can be stolen even
 if PKI and SSL are working propoerly. A morephilosophical issue with
 centralized PKI is that the user identificationinformation lies with
 centralized servers and not users
-themselves~\cite{distlab-pki-poblems}.  Various approaches have been
+themselves~\cite{distlab-pki-problems}.  Various approaches have been
 proposed to avoid some of these errors, none of which have been widely
 accepted. Google has proposed enhancement to PKI as they suspect that
 PKI may be broken in the future and attackers can use this to decipher
@@ -110,7 +142,7 @@ problems can be avoided by adopting a decentralized approach.
 
 \end{acks}
 
-
+\section{figures}
 %\begin{figure}[!ht]
 %  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
 %  \caption{Example caption}\label{f:fly}
