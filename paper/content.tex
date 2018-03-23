@@ -1,0 +1,122 @@
+% status: 20%
+% chapter: TBD
+
+\title{Apache Milagro}
+
+
+\author{Arnav Arnav}
+\affiliation{%
+  \institution{Indiana University
+  Bloomington} \city{Bloomington} \state{Indiana} \postcode{47408} \country{USA}
+  }
+\email{aarnav@iu.edu}
+
+% The default list of authors is too long for headers}
+\renewcommand{\shortauthors}{Arnav}
+
+
+\begin{abstract}
+An increasing number of devices and applications, rely on cloud-based
+app-centric services. Most of these application, such as Internet of
+Things (IoT) applications rely on traditional Public Key
+Infrastructure (PKI), to securely communicate the data. It is known
+that PKI infrastucture has problems and is not the best solution as
+the number of connected devices increses.  Apache Miilagro provides a
+distributed and scalable multi factor authentication that is ideal for
+app-centric services.
+\end{abstract}
+
+\keywords{hid-sp18-503, Milagro, cryptography, cloud applications, IoT }
+%use up to 5 keywords
+
+\maketitle
+
+%% kaafi images
+\section{Introduction}
+
+%shift towards app centric services
+%more connected devices
+% why MFA is needed
+%apache milagro solution
+%Miracl, MFA, TLS intro
+
+
+\section{Problems with PKI}
+Public Key Infrastructure has had many problems and has faced various
+threats over the years.  Firstly, PKI has too many moving parts, and
+setting up a PKI service is not a trivial task. This has lead to many
+organizaations not deploying PKI correctly and leaving their systems
+vulnerable. Furthermore, most applications and users ignore PKI
+warnings such as a website not being secure. These warnings and errors
+can not be enforced in web browsers now, otherwise a lot of pages and
+services would stop working~\cite{cso-pki-problems}.
+
+Since distibuting the list of revoked certificates to the whole system
+can take a long time, there is no guarantee that a key belongs to a
+well identified user at any time. Users may have certificates from
+different Certificate Authorities, which makes it difficult to
+identify users that have revoked certificates form some Certificate
+Authorities~\cite{distlab-pki-problems}.  There have been attacks on
+PKI Certificate Authorities (CAs) and various CAs have been
+compromised. Not only this, atackers in the past have been successful
+in stealing website sertificates, and code signing certificates as in
+the case of stuxnet~\cite{securityweek-ssl-threats}. Encryption makes
+initiating an SSL connection a heavyweight process and thus SSl
+prottected services are susceptible to attacks such as Denial of
+Servics (DoS) and Distributed Denial of Service (DDoS). Many such
+attacks on PKI hvae been listed in ~\cite{cacert-wiki-pki-history}.
+
+Most password protected services rely on PKI and SSL to send passwords
+over the internet. Recording passwords on a server is another problem
+as password servers can be attacked and passwords can be stolen even
+if PKI and SSL are working propoerly. A morephilosophical issue with
+centralized PKI is that the user identificationinformation lies with
+centralized servers and not users
+themselves~\cite{distlab-pki-poblems}.  Various approaches have been
+proposed to avoid some of these errors, none of which have been widely
+accepted. Google has proposed enhancement to PKI as they suspect that
+PKI may be broken in the future and attackers can use this to decipher
+recorded messages from old
+communications~\cite{securityweek-ssl-threats}.  Many of these
+problems can be avoided by adopting a decentralized approach.
+
+
+\section{Milagro Details}
+% why milagro
+% how it works
+% shared keys, d-ta and stuff
+% extend trust as needed
+% revoke trust
+
+\section{Miracl}
+% details on miracl
+% how it is used in milagro
+
+\section{Milagro TLS}
+% perfect forward secrecy
+% certificateless TLS
+% using Milagro auth for peer to peer security
+% how it works
+
+\section{case study} % future work
+% uk tax office user identity assurance
+% etc
+\section{conclusion}
+
+\begin{acks}
+
+  The authors would like to thank Dr.~Gregor~von~Laszewski for his
+  support and suggestions to write this paper.
+
+\end{acks}
+
+
+%\begin{figure}[!ht]
+%  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
+%  \caption{Example caption}\label{f:fly}
+%\end{figure}
+
+
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{report} 
