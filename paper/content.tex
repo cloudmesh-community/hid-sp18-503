@@ -1,17 +1,14 @@
 % status: 20%
 % chapter: TBD
 
-\title{Big Data for Edge Computing}
+\title{Apache Milagro}
 
 
 \author{Arnav Arnav}
 \affiliation{%
-  \institution{Indiana University Bloomington}
-  \city{Bloomington} 
-  \state{Indiana} 
-  \postcode{47408}
-  \country{USA}
-}
+  \institution{Indiana University
+  Bloomington} \city{Bloomington} \state{Indiana} \postcode{47408} \country{USA}
+  }
 \email{aarnav@iu.edu}
 
 % The default list of authors is too long for headers}
@@ -29,22 +26,60 @@ distributed and scalable multi factor authentication that is ideal for
 app-centric services.
 \end{abstract}
 
-\keywords{hid-sp18-503, Milagro, cryptography, cloud applications, IoT }%use up to 5 keywords
+\keywords{hid-sp18-503, Milagro, cryptography, cloud applications, IoT }
+%use up to 5 keywords
 
 \maketitle
 
+%% kaafi images
 \section{Introduction}
 
 %shift towards app centric services
 %more connected devices
-%problems with PKI
+% why MFA is needed
 %apache milagro solution
 %Miracl, MFA, TLS intro
 
+
 \section{Problems with PKI}
-% root key compromize
-% session issues
-% historical examples
+Public Key Infrastructure has had many problems and has faced various
+threats over the years.  Firstly, PKI has too many moving parts, and
+setting up a PKI service is not a trivial task. This has lead to many
+organizaations not deploying PKI correctly and leaving their systems
+vulnerable. Furthermore, most applications and users ignore PKI
+warnings such as a website not being secure. These warnings and errors
+can not be enforced in web browsers now, otherwise a lot of pages and
+services would stop working~\cite{cso-pki-problems}.
+
+Since distibuting the list of revoked certificates to the whole system
+can take a long time, there is no guarantee that a key belongs to a
+well identified user at any time. Users may have certificates from
+different Certificate Authorities, which makes it difficult to
+identify users that have revoked certificates form some Certificate
+Authorities~\cite{distlab-pki-problems}.  There have been attacks on
+PKI Certificate Authorities (CAs) and various CAs have been
+compromised. Not only this, atackers in the past have been successful
+in stealing website sertificates, and code signing certificates as in
+the case of stuxnet~\cite{securityweek-ssl-threats}. Encryption makes
+initiating an SSL connection a heavyweight process and thus SSl
+prottected services are susceptible to attacks such as Denial of
+Servics (DoS) and Distributed Denial of Service (DDoS). Many such
+attacks on PKI hvae been listed in ~\cite{cacert-wiki-pki-history}.
+
+Most password protected services rely on PKI and SSL to send passwords
+over the internet. Recording passwords on a server is another problem
+as password servers can be attacked and passwords can be stolen even
+if PKI and SSL are working propoerly. A morephilosophical issue with
+centralized PKI is that the user identificationinformation lies with
+centralized servers and not users
+themselves~\cite{distlab-pki-poblems}.  Various approaches have been
+proposed to avoid some of these errors, none of which have been widely
+accepted. Google has proposed enhancement to PKI as they suspect that
+PKI may be broken in the future and attackers can use this to decipher
+recorded messages from old
+communications~\cite{securityweek-ssl-threats}.  Many of these
+problems can be avoided by adopting a decentralized approach.
+
 
 \section{Milagro Details}
 % why milagro
@@ -76,28 +111,12 @@ app-centric services.
 \end{acks}
 
 
-\section{Figures}
-
 %\begin{figure}[!ht]
 %  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
 %  \caption{Example caption}\label{f:fly}
 %\end{figure}
 
 
-\section{Check}
-
-make sure just as in previous assignments that you check your paper
-with chktex and lacheck. Fix the errors that you see. Some of the
-errors may be ok, but in general make sure you address all of them. If
-in doubt work with the TA. Simply use
-
-\begin{verbatim}
-make check
-\end{verbatim}
-
-\begin{verbatim}
-make check-ta
-\end{verbatim}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
