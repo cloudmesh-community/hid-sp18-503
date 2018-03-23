@@ -1,0 +1,103 @@
+% status: 20%
+% chapter: TBD
+
+\title{Big Data for Edge Computing}
+
+
+\author{Arnav Arnav}
+\affiliation{%
+  \institution{Indiana University Bloomington}
+  \city{Bloomington} 
+  \state{Indiana} 
+  \postcode{47408}
+  \country{USA}
+}
+\email{aarnav@iu.edu}
+
+% The default list of authors is too long for headers}
+\renewcommand{\shortauthors}{Arnav}
+
+
+\begin{abstract}
+An increasing number of devices and applications, rely on cloud-based
+app-centric services. Most of these application, such as Internet of
+Things (IoT) applications rely on traditional Public Key
+Infrastructure (PKI), to securely communicate the data. It is known
+that PKI infrastucture has problems and is not the best solution as
+the number of connected devices increses.  Apache Miilagro provides a
+distributed and scalable multi factor authentication that is ideal for
+app-centric services.
+\end{abstract}
+
+\keywords{hid-sp18-503, Milagro, cryptography, cloud applications, IoT }%use up to 5 keywords
+
+\maketitle
+
+\section{Introduction}
+
+%shift towards app centric services
+%more connected devices
+%problems with PKI
+%apache milagro solution
+%Miracl, MFA, TLS intro
+
+\section{Problems with PKI}
+% root key compromize
+% session issues
+% historical examples
+
+\section{Milagro Details}
+% why milagro
+% how it works
+% shared keys, d-ta and stuff
+% extend trust as needed
+% revoke trust
+
+\section{Miracl}
+% details on miracl
+% how it is used in milagro
+
+\section{Milagro TLS}
+% perfect forward secrecy
+% certificateless TLS
+% using Milagro auth for peer to peer security
+% how it works
+
+\section{case study} % future work
+% uk tax office user identity assurance
+% etc
+\section{conclusion}
+
+\begin{acks}
+
+  The authors would like to thank Dr.~Gregor~von~Laszewski for his
+  support and suggestions to write this paper.
+
+\end{acks}
+
+
+\section{Figures}
+
+%\begin{figure}[!ht]
+%  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
+%  \caption{Example caption}\label{f:fly}
+%\end{figure}
+
+
+\section{Check}
+
+make sure just as in previous assignments that you check your paper
+with chktex and lacheck. Fix the errors that you see. Some of the
+errors may be ok, but in general make sure you address all of them. If
+in doubt work with the TA. Simply use
+
+\begin{verbatim}
+make check
+\end{verbatim}
+
+\begin{verbatim}
+make check-ta
+\end{verbatim}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{report} 
