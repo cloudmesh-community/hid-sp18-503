@@ -60,7 +60,7 @@ is)~\cite{centrify-mfa}.
 Apache Milagro~\cite{milagro-website} is an apache incubator project
 that provides an open source, distributd, certificate less security
 solution for cloud based application that is easy to scale. Milagro
-consists of Milagro Crypto Library (MCL) that allows users to
+consists of Apache Milagro Crypto Library (AMCL) that allows users to
 establish distributed trust systems using proven and tested
 propocols. Applications can then build on MCL and provide multifactor
 authentication using Milagro MFA, secure communications between a
@@ -137,11 +137,37 @@ where the identity of a user can be proved without showing the user's
 key.  These cryptographic operations are handled by the
 MCL~\cite{milagro-concepts}.
 
-\section{Milagro Crypto Library}
+\section{Apache Milagro Crypto Library}
 % important features of mcl
-% particular things it implements
-% hoe it implements the stuff
-% how it is used in milagro
+Despite extensive research in cryptography, most of the industry
+relies on old technology for security solutions. There are many
+libreries available that provide new cryptographic methods that
+attempt to solve the issues in PKI. Most of these libraries are not
+easy to use, or are dependent on other
+liraries~\cite{mcl-white-paper}.
+
+Apache Milagro crypto library is
+self contained and pnly dependes on external processes to add
+randomness to the key generation process. The library is portable as
+it is not written in assembly language and is reasonably fast. The
+library has been created keeping in mind the memory restrictions on
+small connected devices and takes minimum space. AMCL is available in
+many languages namely C, Java, Javascript, Swift and Go, and uses
+general programming constructs avoiding language specific
+functions. This allows the library to be transated to most other
+langages using already available translators~\cite{mcl-white-paper}.
+
+AMCL uses 128-bit AES encryption, since it is the current standard for
+cryptography and works as well as other variants like 256-bit AES, or
+192-bit AES. Apart from this, the library uses ``SHA256 for hashing,
+256-bit prime field elliptic curves for public key protocols, and
+256-bit BN curves to support pairing-based protocols. However three
+different parameterizations of Elliptic curve are supported -
+Weierstrass, Edwards and Montgomery, as each is appropriate within its
+own niche''~\cite{mcl-white-paper}. The library borrows random number
+generation and symmetric encryption from the open source MIRACL
+library\cite{mcl-white-paper}.
+
 
 \section{Milagro MFA}
 % how it works
