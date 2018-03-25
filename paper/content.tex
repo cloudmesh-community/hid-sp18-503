@@ -1,4 +1,4 @@
-% status: 20%
+% status: 80%
 % chapter: TBD
 
 \title{Apache Milagro}
@@ -58,7 +58,7 @@ three requirements- knowledge (something the user knows), posession
 is)~\cite{centrify-mfa}.
 
 Apache Milagro~\cite{milagro-website} is an apache incubator project
-that provides an open source, distributd, certificate less security
+that provides an open source, distributed, certificate less security
 solution for cloud based application that is easy to scale. Milagro
 consists of Apache Milagro Crypto Library (AMCL) that allows users to
 establish distributed trust systems using proven and tested
@@ -142,7 +142,7 @@ AMCL~\cite{milagro-concepts}.
 Despite extensive research in cryptography, most of the industry
 relies on old technology for security solutions. There are many
 libreries available that provide new cryptographic methods that
-attempt to solve the issues in PKI. Most of these libraries are not
+attempt to solve the issues in PKI\@. Most of these libraries are not
 easy to use, or are dependent on other
 libraries~\cite{mcl-white-paper}.
 
@@ -159,7 +159,7 @@ translators~\cite{mcl-white-paper}.
 
 AMCL uses 128-bit AES encryption, since it is the current standard for
 cryptography and works as well as other variants like 256-bit AES, or
-192-bit AES. Apart from this, the library uses ``SHA256 for hashing,
+192-bit AES\@. Apart from this, the library uses ``SHA256 for hashing,
 256-bit prime field elliptic curves for public key protocols, and
 256-bit BN curves to support pairing-based protocols. However three
 different parameterizations of Elliptic curve are supported -
@@ -187,20 +187,61 @@ authenticaition token saved on a device that a user has. Thus enabling
 distributed two factor authentication. The keys are generated only at
 the server and the client. The Mpn protocol ensures forward secrecy,
 so that, if long term keys are compromised, the previos session can
-not be decrypted \cite{milagro-protocols}.
-% different sdks available
+not be decrypted~\cite{milagro-protocols}.
+
+
+To setup a Milagro MFA service, first the crypto liraries need to be
+cloned and built. Then, the cretdentials can be obtained by a python
+script provided in the repository.  Once this is done, the distributed
+trust authorities need to be set up along with a relaying party
+service and a relaying party application that allows users to log
+in. The milagro repository provides scripts for these tasks. Then,
+various clients can connect and user the service, with the help of
+SDKs available. The SDKs are available for various android, Microsoft
+and iOS platforms, and Milagro MFA can be integrated easily in web
+applications easily~\cite{mfa-install}.
+
 
 \section{Milagro TLS}
-% perfect forward secrecy
-% certificateless TLS
-% using Milagro auth for peer to peer security
-% how it works
 
-%\section{case study} % future work
-% uk tax office user identity assurance
-% etc
+Milagro TLS uses pairing based cryptography to achieve mutually
+authenticated key agreement. It uses two different modules,
+Milagro\_CS which uses the M-Pin protocol to establish mutual
+authentication between a server and a client, and Milagro\_P2P which
+uses the Chow-Choo protocol for key exchange in peer to peer
+communication~\cite{mtls-white-paper}.
+
+
+The chow choo protocol is an identity based key management protocol
+that uses important concepts form elliptic cure pairing based
+cryptography. The protocol helps Milagro to achieve MFA, key agreement
+and distribution of keys from the D-TAs~\cite{milagro-protocols}.
+
+
+As mentioned before, Milagro relies on D-TAs to issue fracions of
+keys. This is possible because a pairing on elliptic curves, keys are
+genetated by multiplying a master secret with a point (P). This master
+secret can be easily represented as the sum of secrets that are
+maintained by different D-TAs and the point (P) can also be
+represented as a sum of different points representing different
+factors such as a user's PIN, or a key embeded in a device. The key in
+its entireity is only known by the device. If two devices with
+embedded keys need to communicate with each other, they can then
+calculate a common key that can be used to encrypt the
+communication. Further restrictions can be enforced on the devices
+where a device is allowed to send o receive data only if it is
+assigned a sender or a reciever key respectively, which are two
+different keys generated using fractions of keys available to each of
+the devices~\cite{milagro-protocols}.
+
 \section{conclusion}
-
+Apache Milagro provides an open source distributd and certificate less
+security solution for cloud based and IoT applications. Milagro is
+built on AMCL and provides Milagro MFA, which is an Apache lisenced
+multi factor authentication service, that can be integrated on various
+platforms. Milagro also provides milagro TLs module which enables
+certificate less authentication in client-server and peer-to-peer
+communication.
 %\begin{figure}[!ht]
 %  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
 %  \caption{Example caption}\label{f:fly}
