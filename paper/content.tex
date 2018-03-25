@@ -31,7 +31,7 @@ app-centric services.
 
 \maketitle
 
-%% kaafi images
+
 \section{Introduction}
 With the increasing competition in the industry, fast delivery of
 services to users is one of the major concerns. Starting up services
@@ -62,7 +62,7 @@ that provides an open source, distributed, certificate less security
 solution for cloud based application that is easy to scale. Milagro
 consists of Apache Milagro Crypto Library (AMCL) that allows users to
 establish distributed trust systems using proven and tested
-propocols. Applications can then build on MCL and provide multifactor
+propocols. Applications can then build on AMCL and provide multifactor
 authentication using Milagro MFA, secure communications between a
 client and a server and also in peer to peer
 comunication~\cite{milagro-docs-overview}.
@@ -73,7 +73,7 @@ comunication~\cite{milagro-docs-overview}.
 Public Key Infrastructure has had many problems and has faced various
 threats over the years.  Firstly, PKI has too many moving parts, and
 setting up a PKI service is not a trivial task. This has lead to many
-organizaations not deploying PKI correctly and leaving their systems
+organizations not deploying PKI correctly and leaving their systems
 vulnerable. Furthermore, most applications and users ignore PKI
 warnings such as a website not being secure. These warnings and errors
 can not be enforced in web browsers now, otherwise a lot of pages and
@@ -87,22 +87,22 @@ identify users that have revoked certificates form some Certificate
 Authorities~\cite{distlab-pki-problems}.  There have been attacks on
 PKI Certificate Authorities (CAs) and various CAs have been
 compromised. Not only this, atackers in the past have been successful
-in stealing website sertificates, and code signing certificates as in
+in stealing website certificates, and code signing certificates as in
 the case of stuxnet~\cite{securityweek-ssl-threats}. Encryption makes
-initiating an SSL connection a heavyweight process and thus SSl
-prottected services are susceptible to attacks such as Denial of
+initiating an SSL connection a heavyweight process and thus SSL
+protected services are susceptible to attacks such as Denial of
 Servics (DoS) and Distributed Denial of Service (DDoS). Many such
-attacks on PKI hvae been listed in~\cite{cacert-wiki-pki-history}.
-Many commercial PKI services use Identity certificates to sidestep the
-concern whether a commercial CA actualy had the authority to provide
-certificates, and leave it to the users to verify the actual
+attacks on PKI have been listed in~\cite{cacert-wiki-pki-history}.
+Many commercial PKI services use Identity certificates to side-step
+the concern whether a commercial CA actually had the authority to
+provide certificates, and leave it to the users to verify the actual
 identity~\cite{ten-pki-risks}.
 
 Most password protected services rely on PKI and SSL to send passwords
 over the internet. Recording passwords on a server is another problem
 as password servers can be attacked and passwords can be stolen even
-if PKI and SSL are working propoerly. A morephilosophical issue with
-centralized PKI is that the user identificationinformation lies with
+if PKI and SSL are working propoerly. A more philosophical issue with
+centralized PKI is that user identification information lies with
 centralized servers and not users
 themselves~\cite{distlab-pki-problems}.  Various approaches have been
 proposed to avoid some of these errors, none of which have been widely
@@ -115,7 +115,7 @@ problems can be avoided by adopting a decentralized approach.
 
 \section{Milagro Details}
 % more on elliptic curve pairing -- medium
-Milagro uses cryptography techniques based on pairing on ellipic
+Milagro uses cryptography techniques based on pairing on elliptic
 curves. Elliptic curves are mathematical structures on which
 operations are easily defined. Muliplication of a point on a curve to
 a number can be easily computed, but it is computationally difficult
@@ -131,8 +131,8 @@ key among different distributed trust authorities (D-TAs) and provides
 additional security as the D-TAs are isolated and idependent of each
 other. This eliminates a single point of failure, and allows the key
 generation and distribution to be a part of the system itself. Apache
-milagro provides Identity Based Encryption (IBE) where a users key can
-be set to a predefined identifier, and ero knowledge authentication,
+milagro provides Identity Based Encryption (IBE) where a key can be
+set to a predefined identifier, and zero knowledge authentication,
 where the identity of a user can be proved without showing the user's
 key.  These cryptographic operations are handled by the
 AMCL~\cite{milagro-concepts}.
@@ -173,7 +173,7 @@ MIRACL library~\cite{mcl-white-paper}.
 
 Milagro Multi Factor Authentication is an apache lisenced version of
 the M-Pin protocol and is safe against man in the middle and key
-compromise impoersonation attacks~\cite{milagro-mfa}.
+compromise impersonation attacks~\cite{milagro-mfa}.
 
 Under the M-Pin protocol, the client and the server are issued secret
 keys derived from their identities. The client then uses a zero
@@ -185,20 +185,20 @@ be regenerated by adding the two parts together. One part of the key
 can be a 4 digit pin that the user knows and the other can be a
 authenticaition token saved on a device that a user has. Thus enabling
 distributed two factor authentication. The keys are generated only at
-the server and the client. The Mpn protocol ensures forward secrecy,
-so that, if long term keys are compromised, the previos session can
+the server and the client. The M-Pin protocol ensures forward secrecy,
+so that, if long term keys are compromised, the previous session can
 not be decrypted~\cite{milagro-protocols}.
 
 
 To setup a Milagro MFA service, first the crypto liraries need to be
-cloned and built. Then, the cretdentials can be obtained by a python
+cloned and built. Then, the credentials can be obtained by a python
 script provided in the repository.  Once this is done, the distributed
 trust authorities need to be set up along with a relaying party
 service and a relaying party application that allows users to log
 in. The milagro repository provides scripts for these tasks. Then,
 various clients can connect and user the service, with the help of
-SDKs available. The SDKs are available for various android, Microsoft
-and iOS platforms, and Milagro MFA can be integrated easily in web
+SDKs available. The SDKs are available for android, Microsoft and iOS
+platforms, and Milagro MFA can be integrated easily in web
 applications easily~\cite{mfa-install}.
 
 
@@ -212,22 +212,22 @@ uses the Chow-Choo protocol for key exchange in peer to peer
 communication~\cite{mtls-white-paper}.
 
 
-The chow choo protocol is an identity based key management protocol
+The Chow-Choo protocol is an identity based key management protocol
 that uses important concepts form elliptic cure pairing based
 cryptography. The protocol helps Milagro to achieve MFA, key agreement
 and distribution of keys from the D-TAs~\cite{milagro-protocols}.
 
 
 As mentioned before, Milagro relies on D-TAs to issue fracions of
-keys. This is possible because a pairing on elliptic curves, keys are
-genetated by multiplying a master secret with a point (P). This master
-secret can be easily represented as the sum of secrets that are
-maintained by different D-TAs and the point (P) can also be
-represented as a sum of different points representing different
-factors such as a user's PIN, or a key embeded in a device. The key in
-its entireity is only known by the device. If two devices with
-embedded keys need to communicate with each other, they can then
-calculate a common key that can be used to encrypt the
+keys. This is possible because using a pairing on elliptic curves,
+keys are genetated by multiplying a master secret with a point
+(P). This master secret can be easily represented as the sum of
+secrets that are maintained by different D-TAs and the point (P) can
+also be represented as a sum of different points representing
+different factors such as a user's PIN, or a key embeded in a
+device. The key in its entireity is only known by the device. If two
+devices with embedded keys need to communicate with each other, they
+can then calculate a common key that can be used to encrypt the
 communication. Further restrictions can be enforced on the devices
 where a device is allowed to send o receive data only if it is
 assigned a sender or a reciever key respectively, which are two
@@ -235,17 +235,19 @@ different keys generated using fractions of keys available to each of
 the devices~\cite{milagro-protocols}.
 
 \section{conclusion}
-Apache Milagro provides an open source distributd and certificate less
-security solution for cloud based and IoT applications. Milagro is
-built on AMCL and provides Milagro MFA, which is an Apache lisenced
+Traditional cryptography solutions based on Public Key Infrastructure
+suffer from several problems and security thrests, which have been
+exploited in the past by attackers. However PKI can still be used in a
+client-server based application it is not the best solution for
+distributed and peer to peer applications such as IoT applications.
+
+Apache Milagro provides an open source distributed and certificate
+less security solution for cloud based and IoT applications. Milagro
+is built on AMCL and provides Milagro MFA, which is an Apache lisenced
 multi factor authentication service, that can be integrated on various
 platforms. Milagro also provides milagro TLs module which enables
 certificate less authentication in client-server and peer-to-peer
 communication.
-%\begin{figure}[!ht]
-%  \centering\includegraphics[width=\columnwidth]{../../hid-sample/tex/images/fly.pdf}
-%  \caption{Example caption}\label{f:fly}
-%\end{figure}
 
 \begin{acks}
 
