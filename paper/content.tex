@@ -129,13 +129,19 @@ centralized certificate authority.
 Apache milagro uses pairing based cryptography (PBC) to split a users
 key among different distributed trust authorities (D-TAs) and provides
 additional security as the D-TAs are isolated and idependent of each
-other. This eliminates a single point of failure, and allows the key
-generation and distribution to be a part of the system itself. Apache
-milagro provides Identity Based Encryption (IBE) where a key can be
-set to a predefined identifier, and zero knowledge authentication,
-where the identity of a user can be proved without showing the user's
-key.  These cryptographic operations are handled by the
-AMCL~\cite{milagro-concepts}.
+other as showin in figure~\ref{f:fig1}. This eliminates a single point
+of failure, and allows the key generation and distribution to be a
+part of the system itself. Apache milagro provides Identity Based
+Encryption (IBE) where a key can be set to a predefined identifier,
+and zero knowledge authentication, where the identity of a user can be
+proved without showing the user's key.  These cryptographic operations
+are handled by the AMCL~\cite{milagro-concepts}.
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{../images/dta.pdf}
+  \caption{Each of the D-TAs have a fraction of the key~\cite{dta-image}
+  }\label{f:fig1}
+\end{figure}
 
 \section{Apache Milagro Crypto Library}
 % important features of mcl
