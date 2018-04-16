@@ -4,8 +4,10 @@
   Also note that the Makefile requires the environment variable
   *mongo_path* that contains the path to the mongo db directory
   for example ~/cloudmesh/data/db
+  The program assumes that data resides in a database named "rest_db"
+  inside a collection named "dirs"
 
-  	export mongo_path=<path to mongo db directory>       
+  	  export mongo_path = /path to mongo db directory/       
 
   This path is used as the volume for the mongodb container, whose image
   will be pulled form docker hub
