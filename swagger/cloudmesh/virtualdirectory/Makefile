@@ -6,7 +6,7 @@ SPEC=virtual_dir_v0_0_3.yml
 DB=${mongo_path}
 DB_NAME=cloudmesh_vdir_db
 SERVICE_NAME=cloudmesh_vdir_service
-swagger_codegen="java -jar swagger-codegen-cli.jar"
+swagger_codegen=java -jar swagger-codegen-cli.jar
 
 all: fetch generate requirements
 	@echo "DONE"
@@ -36,7 +36,7 @@ docker-stop:
 fetch:
 	wget http://central.maven.org/maven2/io/swagger/\
 	swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar \
-	-O swagger-codegen-cli.jar && \
+	-O swagger-codegen-cli.jar
 
 generate:
 	$(swagger_codegen) generate \
