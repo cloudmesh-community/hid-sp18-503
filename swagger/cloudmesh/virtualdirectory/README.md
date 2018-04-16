@@ -2,10 +2,10 @@
 
 * Prerequisite: docker should be installed
   Also note that the Makefile requires the environment variable
-  *mongo_path* that contains the path to the mongo db directory
+  ```mongo_path``` that contains the path to the mongo db directory
   for example ~/cloudmesh/data/db
-  The program assumes that data resides in a database named "rest_db"
-  inside a collection named "dirs"
+  The program assumes that data resides in a database named ```rest_db```
+  inside a collection named ```dirs```
 
   	  export mongo_path = /path to mongo db directory/       
 
