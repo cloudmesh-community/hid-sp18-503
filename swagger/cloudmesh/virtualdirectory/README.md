@@ -14,11 +14,11 @@
   
 * Use the Makefile to build docker image for the service using
 
-      make docker-build
+		make docker-build
 
-* Use the Makefile to start the service,
-  
-	make docker-start
+* Use the Makefile to start the service
+
+		make docker-start
 	
   This will start 2 containers, one with the mongodb database,
   (mapped to host port 27017) and the other with run the swagger
@@ -30,6 +30,10 @@
       /cloudmesh/virtualdirectory/dir/{dirName}: get data for {dirName}
 
 
-* To stop the service and clean the directory run
+* To stop the docker services run
 
-     make clean
+		make docker-stop
+
+* To stop the service, clean the directory, and remove teh containers run
+
+     	make clean
