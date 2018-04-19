@@ -1,0 +1,20 @@
+TODO:
+VM setup script
+setup vm from script
+enable sshport forwarding
+install openssh
+>> find a way to run commands inside vm
+
+STACK install script
+install devstack
+create new user
+give privilleges
+
+
+code create script:
+dockerize code using dockerfile
+get data
+extract
+connect volume
+start service
+see working

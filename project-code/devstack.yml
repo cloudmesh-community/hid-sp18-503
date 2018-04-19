@@ -1,0 +1,145 @@
+# swagger service for virtual directory
+---
+swagger: '2.0'
+info:
+  version: '0.0.3'
+  title: 'Openstack REST Service Using Swagger'
+  description: >
+    A REST service that allows to create
+    and mamage Virtual machines on Openstack.
+    Tested on a local devstack vm
+  contact:
+    name: 'Cloudmesh Openstack REST service'
+  license:
+    name: 'Apache'
+
+host: 'localhost:8080'
+basePath: '/cloudmesh/openstack'
+
+schemes:
+  - 'http'
+consumes:
+  - 'application/json'
+produces:
+  - 'application/json'
+
+paths:
+  '/images':
+    get:
+      description: "Returns a list of all available Images"
+      operationId: getImages
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'a list of available images'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Image'
+
+  '/image/{name}':
+    get:
+      description: "Returns details of the image with the given name"
+      produces:
+        - 'application/json'
+      operationId: getImageById
+      parameters:
+        - name: image_name
+          in: path
+          description: 'name of the image'
+          required: true
+          type: string
+      responses:
+        200:
+          description: "A list of files"
+          schema:
+            $ref: "#/definitions/Image"
+
+  '/servers':
+    get:
+      description: "Returns a List of all VMs"
+      operationId: getServers
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'a list of available VMs'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Server'
+
+  '/server/create':
+    post:
+      description: "Create a server with the given parameters"
+      operationId: createServer
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: server
+          description: "object specifying server to be created"
+          schema:
+            $ref: "#/definitions/Server"
+      responses:
+        '200':
+          description: 'returns the details of the server that was created'
+          schema:
+            $ref: '#/definitions/Server'
+
+  '/server/start':
+    post:
+      description: "start a server with the given parameters"
+      operationId: startServer
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: server
+          description: "object specifying server to be created"
+          schema:
+            $ref: "#/definitions/Server"
+      responses:
+        '200':
+          description: 'returns the details of the server that was started'
+          schema:
+            $ref: '#/definitions/Server'
+
+  '/server/stop':
+    post:
+      description: "stop a server with the given parameters"
+      operationId: stopServer
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: server
+          description: "object specifying server to be created"
+          schema:
+            $ref: "#/definitions/Server"
+      responses:
+        '200':
+          description: 'returns the details of the server that was stopped'
+          schema:
+            $ref: '#/definitions/Server'
+
+definitions:
+  Image:
+    type: "object"
+    required:
+      - "name"
+      - "flavour"
+      - "username"
+      - "password"
+    properties:
+      name:
+        type: "string"
+      flavour:
+        type: "string"
+      username:
+        type: "string"
+      password:
+        type: "string"
+      floatingIP:
+        type: "string"
