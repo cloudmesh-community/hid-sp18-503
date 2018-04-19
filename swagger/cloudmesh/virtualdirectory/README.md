@@ -2,10 +2,10 @@
 
 * Prerequisite: docker should be installed
   Also note that the Makefile requires the environment variable
-  *mongo_path* that contains the path to the mongo db directory
+  ```mongo_path``` that contains the path to the mongo db directory
   for example ~/cloudmesh/data/db
-  The program assumes that data resides in a database named "rest_db"
-  inside a collection named "dirs"
+  The program assumes that data resides in a database named ```rest_db```
+  inside a collection named ```dirs```
 
   	  export mongo_path = /path to mongo db directory/       
 
@@ -14,11 +14,11 @@
   
 * Use the Makefile to build docker image for the service using
 
-      make docker-build
+		make docker-build
 
-* Use the Makefile to start the service,
-  
-	make docker-start
+* Use the Makefile to start the service
+
+		make docker-start
 	
   This will start 2 containers, one with the mongodb database,
   (mapped to host port 27017) and the other with run the swagger
@@ -30,6 +30,10 @@
       /cloudmesh/virtualdirectory/dir/{dirName}: get data for {dirName}
 
 
-* To stop the service and clean the directory run
+* To stop the docker services run
 
-     make clean
+		make docker-stop
+
+* To stop the service, clean the directory, and remove teh containers run
+
+     	make clean
