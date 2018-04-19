@@ -125,7 +125,7 @@ paths:
             $ref: '#/definitions/Server'
 
 definitions:
-  Image:
+  Server:
     type: "object"
     required:
       - "name"
