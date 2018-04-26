@@ -166,6 +166,19 @@ paths:
             items:
               $ref: '#/definitions/Subnet'
 
+  '/keypairs':
+    get:
+      description: "Returns a List of available keypairs"
+      operationId: getKeys
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'a list of available keypairs'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Keypair'
 definitions:
   Flavor:
     type: "object"
@@ -194,7 +207,7 @@ definitions:
     properties:
       name:
         type: "string"
-      flavour:
+      flavour_id:
         type: "string"
       floatingIP:
         type: "string"
@@ -208,6 +221,11 @@ definitions:
         type: "array"
         items:
           type: "string"
+      keypair:
+        type: "string"
+      network:
+        type: "string"
+
   Image:
     type:
       "object"
@@ -262,4 +280,15 @@ definitions:
       name:
         type: "string"
       is_dhcp_enabled:
+        type: "string"
+  Keypair:
+    type: "object"
+    required:
+      - "name"
+    properties:
+      name:
+        type: "string"
+      public_key:
+        type: "string"
+      private_key:
         type: "string"
