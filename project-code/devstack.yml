@@ -59,7 +59,7 @@ paths:
         - 'application/json'
       operationId: getImageById
       parameters:
-        - name: image_name
+        - name: name
           in: path
           description: 'name of the image'
           required: true
@@ -100,7 +100,7 @@ paths:
         '200':
           description: 'returns the details of the server that was created'
           schema:
-            $ref: '#/definitions/ServerAttrs'
+            $ref: '#/definitions/Server'
 
   '/server/start':
     post:
@@ -184,7 +184,7 @@ definitions:
         type: "string"
       disk:
         type: "string"
-      
+
   Server:
     type: "object"
     required:
@@ -204,7 +204,7 @@ definitions:
         type: "string"
       created_at:
         type: "string"
-      security_gropups:
+      security_groups:
         type: "array"
         items:
           type: "string"
@@ -237,8 +237,8 @@ definitions:
         type: "string"
       subnets:
         type: "array"
-	items:
-	  type: "string"
+        items:
+          type: "string"
       status:
         type: "string"
       mtu:
@@ -254,8 +254,8 @@ definitions:
         type "string"
       dns_nameservers:
         type: "array"
-	items:
-	  type: "string"
+        items:
+          type: "string"
 
       project_id:
         type: "string"
