@@ -1,0 +1,16 @@
+clouds:
+  devstack:
+    region_name: 'RegionOne'
+    auth:
+      username: TBD
+      password: TBD
+      project_name: 'alt_demo'
+      auth_url: 'http://129.114.109.140:5000/v2.0'
+      
+  cham:
+    region_name: 'RegionOne'
+    auth:
+      username: TBD
+      password: TBD
+      project_name: 'CH-819337'
+      auth_url: 'https://openstack.tacc.chameleoncloud.org:5000'

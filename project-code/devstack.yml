@@ -24,6 +24,20 @@ produces:
   - 'application/json'
 
 paths:
+  '/flavors':
+    get:
+      description: "Returns a list of all available Flavors"
+      operationId: getFlavors
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'a list of available flavors'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Flavor'
+
   '/images':
     get:
       description: "Returns a list of all available Images"
@@ -45,7 +59,7 @@ paths:
         - 'application/json'
       operationId: getImageById
       parameters:
-        - name: image_name
+        - name: name
           in: path
           description: 'name of the image'
           required: true
@@ -124,22 +138,128 @@ paths:
           schema:
             $ref: '#/definitions/Server'
 
+  '/networks':
+    get:
+      description: "Returns a List of all Networks"
+      operationId: getNetworks
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'a list of available Networks'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Network'
+
+  '/networks/subnets':
+    get:
+      description: "Returns a List of all Subnets"
+      operationId: getSubnets
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'a list of available Subnets'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Subnet'
+
 definitions:
-  Image:
+  Flavor:
+    type: "object"
+    required:
+      - "name"
+    properties:
+      vcpus:
+        type: "string"
+      name:
+        type: "string"
+      id:
+        type: "string"
+      swap:
+        type: "string"
+      ram:
+        type: "string"
+      disk:
+        type: "string"
+
+  Server:
     type: "object"
     required:
       - "name"
       - "flavour"
-      - "username"
-      - "password"
+      - "image"
     properties:
       name:
         type: "string"
       flavour:
         type: "string"
-      username:
-        type: "string"
-      password:
-        type: "string"
       floatingIP:
+        type: "string"
+      image_id:
+        type: "string"
+      status:
+        type: "string"
+      created_at:
+        type: "string"
+      security_groups:
+        type: "array"
+        items:
+          type: "string"
+  Image:
+    type:
+      "object"
+    required:
+      - "name"
+    properties:
+      name:
+        type: "string"
+      id:
+        type: "string"
+      min_ram:
+        type: "string"
+      min_disk:
+        type: "string"
+      status:
+        type: "string"
+      updated_at:
+        type: "string"
+      size:
+        type: "string"
+  Network:
+    type: "object"
+    required:
+      - "id"
+    properties:
+      id:
+        type: "string"
+      subnets:
+        type: "array"
+        items:
+          type: "string"
+      status:
+        type: "string"
+      mtu:
+        type: "string"
+      is_router_external:
+        type: "string"
+  Subnet:
+    type: "object"
+    required:
+      - "id"
+    properties:
+      id:
+        type "string"
+      dns_nameservers:
+        type: "array"
+        items:
+          type: "string"
+
+      project_id:
+        type: "string"
+      name:
+        type: "string"
+      is_dhcp_enabled:
         type: "string"
