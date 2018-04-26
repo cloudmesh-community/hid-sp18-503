@@ -3,6 +3,7 @@ import six
 
 from swagger_server.models.flavor import Flavor  # noqa: E501
 from swagger_server.models.image import Image  # noqa: E501
+from swagger_server.models.keypair import Keypair # noqa: E501
 from swagger_server.models.network import Network  # noqa: E501
 from swagger_server.models.server import Server  # noqa: E501
 from swagger_server.models.subnet import Subnet  # noqa: E501
@@ -10,6 +11,7 @@ from swagger_server import util
 
 import openstack
 conn = openstack.connect(cloud="cham")
+KEYFILE = "gen-keys"
 
 def create_server(server=None):  # noqa: E501
     """create_server
@@ -22,8 +24,17 @@ def create_server(server=None):  # noqa: E501
     :rtype: Server
     """
     if connexion.request.is_json:
-        server = Server.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+         server = Server.from_dict(connexion.request.get_json())  # noqa: E501
+    print(server)
+    new_server = conn.compute.create_server(name = server.name,
+                                            image_id=server.image_id,
+                                            flavor_id = server.flavour_id,
+                                            networks = [{"uuid":
+                                                         server.network}],
+                                            key_name = server.keypair)
+    
+    new_server = conn.compute.wait_for_server(new_server)
+    return new_server
 
 
 def get_flavors():  # noqa: E501
@@ -100,6 +111,21 @@ def get_images():  # noqa: E501
     return image_list
 
 
+def get_keys():  # noqa: E501
+    """get_keys:
+    Returns a List of available keypairs # noqa: E501
+    :rtype: List[Keypair]
+    """
+    keys_list = []
+    for keys in conn.compute.keypairs():
+        key_dict = keys.to_dict()
+        key_obj = Keypair(name = key_dict["name"],
+                          public_key = key_dict["public_key"])
+        keys_list.append(key_obj)
+    return keys_list
+
+
+
 def get_networks():  # noqa: E501
     """get_networks
 
@@ -139,7 +165,7 @@ def get_servers():  # noqa: E501
         server_name = server_dict["name"]
         print(server_name)
         image_id = server_dict["image_id"]
-        flavor = server_dict["flavor"]['id']
+        flavor_id = server_dict["flavor"]['id']
         floating_ip = None
         found = False
         
@@ -157,7 +183,7 @@ def get_servers():  # noqa: E501
         security_groups = server_dict["security_groups"]
         server_obj = Server(name = server_name,
                             image_id = image_id,
-                            flavour = flavor,
+                            flavour_id = flavor_id,
                             floating_ip = floating_ip,
                             status = status,
                             created_at = created_at,
@@ -205,9 +231,8 @@ def start_server(server=None):  # noqa: E501
     """
     if connexion.request.is_json:
         server = Server.from_dict(connexion.request.get_json())  # noqa: E501
-    print(server)
+    
     stack_server = conn.compute.find_server(server.name)
-    print(stack_server)
     if not stack_server:
         return 'Server Not Found'
     else:
@@ -226,4 +251,10 @@ def stop_server(server=None):  # noqa: E501
     """
     if connexion.request.is_json:
         server = Server.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+
+    stack_server = conn.compute.find_server(server.name)
+    if not stack_server:
+        return 'Server Not Found'
+    else:
+        conn.compute.stop_server(stack_server)
+        return server
