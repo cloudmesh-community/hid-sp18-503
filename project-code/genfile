@@ -46,18 +46,19 @@ generate:
 		-o server/devstack/flaskConnexion \
 		-D supportPython2=true 
 	@echo "generated code"
-	cp *_controller.py server/virtual_directory/flaskConnexion/swagger_server/controllers/  
+	cp *_controller.py server/devstack/flaskConnexion/swagger_server/controllers/
+	cp clouds.yaml server/devstack/flaskConnexion/
 	@echo "copied"
 run:
-	cd server/virtual_directory/flaskConnexion/ &&\
+	cd server/devstack/flaskConnexion &&\
 	python -m swagger_server
 
 requirements:
 	pip install -r requirements.txt
-	cd server/virtual_directory/flaskConnexion; pip install -r requirements.txt
+	cd server/devstack/flaskConnexion; pip install -r requirements.txt
 
 clean:
-	rm swagger-codegen-cli.jar
 	rm -rf server/
+	rm swagger-codegen-cli.jar
 	docker rm $(DB_NAME)
 	docker rm $(SERVICE_NAME)

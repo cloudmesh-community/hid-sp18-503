@@ -136,25 +136,33 @@ def get_servers():  # noqa: E501
     server_list = []
     for server in conn.compute.servers():
         server_dict = server.to_dict()
-        name = server_dict["name"]
+        server_name = server_dict["name"]
+        print(server_name)
         image_id = server_dict["image_id"]
         flavor = server_dict["flavor"]['id']
         floating_ip = None
+        found = False
+        
         for name, net_list in server_dict["addresses"].items():
             for item in net_list:
-                if item["OS-EXT-IPS:type"] == 'floaing':
+                if item["OS-EXT-IPS:type"] == 'floating':
                     floating_ip = item["addr"]
+                    found = True
                     break
+            if found:
+                break
+            
         status = server_dict["status"]
         created_at = server_dict["created_at"]
         security_groups = server_dict["security_groups"]
-        server_obj = Server(name = name,
+        server_obj = Server(name = server_name,
                             image_id = image_id,
                             flavour = flavor,
                             floating_ip = floating_ip,
                             status = status,
                             created_at = created_at,
                             security_groups = security_groups)
+                            
         server_list.append(server_obj)
     return server_list
 
@@ -197,8 +205,14 @@ def start_server(server=None):  # noqa: E501
     """
     if connexion.request.is_json:
         server = Server.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
-
+    print(server)
+    stack_server = conn.compute.find_server(server.name)
+    print(stack_server)
+    if not stack_server:
+        return 'Server Not Found'
+    else:
+        conn.compute.start_server(stack_server)
+        return server
 
 def stop_server(server=None):  # noqa: E501
     """stop_server
