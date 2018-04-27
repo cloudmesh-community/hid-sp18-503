@@ -26,15 +26,18 @@ def create_server(server=None):  # noqa: E501
     if connexion.request.is_json:
          server = Server.from_dict(connexion.request.get_json())  # noqa: E501
     print(server)
-    new_server = conn.compute.create_server(name = server.name,
-                                            image_id=server.image_id,
-                                            flavor_id = server.flavour_id,
-                                            networks = [{"uuid":
-                                                         server.network}],
-                                            key_name = server.keypair)
+    try:
+        new_server = conn.compute.create_server(name = server.name,
+                                                image_id=server.image_id,
+                                                flavor_id = server.flavour_id,
+                                                networks = [{"uuid":
+                                                             server.network}],
+                                                key_name = server.keypair)
     
-    new_server = conn.compute.wait_for_server(new_server)
-    return new_server
+        new_server = conn.compute.wait_for_server(new_server)
+        return new_server
+    except:
+        return "An Error Occured, Can't create server"
 
 
 def get_flavors():  # noqa: E501

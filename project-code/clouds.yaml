@@ -14,3 +14,5 @@ clouds:
       password: TBD
       project_name: 'CH-819337'
       auth_url: 'https://openstack.tacc.chameleoncloud.org:5000'
+      #auth_url: https://chi.uc.chameleoncloud.org:5000/v3.0
+      #can't connect to chi@uc.. public endpoint for compute not found

@@ -6,11 +6,8 @@
 
 \author{Arnav Arnav}
 \affiliation{%
-  \institution{Indiana University}
-  \city{Bloomington} 
-  \state{IN} 
-  \postcode{47408}
-  \country{USA}}
+  \institution{Indiana
+  University} \city{Bloomington} \state{IN} \postcode{47408} \country{USA}}
 \email{aarnav@iu.edu}
 
 
@@ -22,7 +19,7 @@
 Openstack is one of the most important cloud coputing Infrastructure
 as a Service that allows users to setup and manage servers easily. It
 provides APIs that help users to manage these services through
-command-line and through code. The NIST Big Data Reference
+command-line and through code. The NIST Big Data Reference 
 Architecture defines a reference architecture for various objects that
 are important in the context of cloud computing. In this project we
 aim to build a REST service using these object specifications that
@@ -35,6 +32,15 @@ help users complete an openstack deployment easily.
 \maketitle
 
 \section{Introduction}
+Openstack is a free and open source cloud Infrastructure as a Service
+that allows users to set up resources such as virtual servers for
+their customers. It is one of the most widely deployed cloud
+infrastructure and is constantly improving. It provides an openstack
+python software development toolkit (sdk) that contains python APIs
+for openstack services along with command line tools that allow users
+to write python code to remotely perform actions on the openstack
+cloud
+
 Representational State Transfer (REST) is an architectural standard
 for web applications that allows different applications to comunicate
 easily. It allows separation of clients and servers and the server
@@ -42,59 +48,130 @@ funcionality can be esily changed without affecting the client's
 interface to the server. REST is highly scalable and easy to
 extend~\cite{hid-sp18-503-REST}. The NIST Big Data Reference
 Architecture defines standard properties for objects that that are
-important to Big Data echosystem.%~\cite{}.
+important to Big Data echosystem.
+%~\cite{}.
 These objects can be easily accessed or transferred with the use of
-RESTful Applications
-that use REST verbs (GET, PUT, POST, UPDATE, DELETE) to manipulate
-these objects~\cite{hid-sp18-503-REST}.
+RESTful Applications that use REST verbs (GET, PUT, POST, UPDATE,
+DELETE) to manipulate these objects~\cite{hid-sp18-503-REST}.
 
-Openstack is a free and open source cloud Infrastructure as a Service
-that allows users to set up resources such as virtual servers for
-their customers. It is one of the most widely deployed cloud
-infrastructure and is constantly improving.
 %\cite{}
-
 We aim to develop a REST service with the help of Swagger - a tool
 that converts a yml specification to code - that can be used by other
-applications to setup and manage an openstack deployment.
+applications to setup and manage Virtual Machines on openstack.
 
 Doing this requires identification of various objects that are needed
-to accomplish such a task. Some of these are images, virtual machines,
-virtual directories, files and openstack user details. Each of these
-objects should be accessible freom the REST application, so that they
-can be updated and stored as necessary. It is also important to have a
-REST functionality that allows execution of commands to the openstack
-server created with the help of these objects.
+to accomplish such a task. Some of these are images, servers,
+keypairs, networks, and subnets. Each of these objects should be
+accessible from the REST application, so that they can be updated and
+stored as necessary.
 
-We finally create a command line utility using cloudmesh cmd5
-that allows users to start up the REST service and run commands
-directly from the comandline without worrying too much about the
-underlying architecture.
-
-\section{Object Definitions}
+\section{Openstack Services}
+Openstack consists of various services that are responsible for
+different operations. Each of htese services are important from a
+users viewpoit and are described below:
 
 \begin{itemize}
-\item files : files that may be required by the user or an
-application
+\item \textbf{Keystone}: Keystone is the identity management system for
+openstack. It is this service that generates authentication tokens a and
+identifies users with the help of passwords and provides the need for
+users to identify themselvs in their applications. Keystone can be
+integrated with third party services such as Lightweight Directory
+Access Protocol (LDAP)
 
-\item virtual directory : a directroy that has information
-about the files. this can be a remote directory that can be accessed
-when necessary.
+\item \textbf{Nova}: Nova is the compute service from Openstack, and is
+responsible for the management, creation and deletion of virtual machines.
+Nova allows administrators to choose the hypervisor of their choice while
+providing a common API to manage VMs
 
-\item image: operating system image that can be used
-for a virtual machine
+\item \textbf{Glance}: The service responsible for managing and cataloging
+images that are uploaded by the users.
 
-\item virtual machine: the harware details
-required for the the virtual machine along with the name and ip
-adresses associated.
+\item \textbf{Neutron}: Neutron is a networking service provided by openstack.
+It is responsible for creating networks between VMs and for ensuring various
+network services available to the user.
 
-\item openstack credentials: credentials
-provided by openstack to use the openstack api
+\item \textbf{Cinder}: Cinder is the service responsible for managing the
+external storage including external volumes and Network File storage (NFS).
+It allows vendors to create specialized plucins for their devices.
 
-\item user details :
-details about the various users that can access the virtual machine
+\item \textbf{Heat}: Heat is the cloud orchestration layer on opestack. It
+is responsible for providing Floating IPs, managing security groups, servers
+and many other services.
+
+\item \textbf{Horizon}: Horizon is the Graphical User Interface (GUI) dashboard
+that allows users to conect to openstack and manage their cloud using their
+web browsers. 
+
+Openstack provides differnet clients for each of these services that
+can be installed individually as needed. They provide a common unified
+API with the help of the openstack SDK that allows users to access
+most of thse sevices. Some of the services do not have complete
+functionality in the openstack SDK, which will be included in the near
+future
 
 \end{itemize}
+%% https://docs.oracle.com/cd/E64747_01/E64749/html/
+   %%osusg-openstack-services.html
+%% each service serparately + last 
+\section{Object Definitions}
+The objects that are used in this project are inspired by the objects defined in the Nist Big Data Reference Architecture NIST (BDRA) document and are listed below:
+
+\begin{itemize}
+\item \textbf{Image}: An Image defines what types of operating systems are
+availabe to be used to create a virtual machine on openstack. Each of
+the images can have different minimum requirements that are needed to
+install the operating system and they must be included in the
+object. The minimal image object that was used for the project is
+shown in the appendix
+
+\item \textbf{Keypair}: A keypair defines a set of RSA keys that are
+generated by openstack to allow usere to correctly identify themselves
+and to log into the servers. It has two parts, a public key and a
+provate key and is identified with the help of a user defined
+name. The minimal object for an image is shown in the appendix.
+
+\item \textbf{Flavor}: Flavors identify the different types of hadrdware
+available to the openstack users. A user can select a flavor based on
+their needs and the requirements o the image. The flavors include in
+their definition the RAM size, disk size, the number of virtual CPUs
+and the available swap memory, and are identified using a unique ID
+and a name.  A minimal definition of the flavor object is shown in the
+appendix
+
+\item \textbf{Server}: A server is another name for a Virtual Machine
+running on the openstack cloud. To define a server we must define the
+name of the server, the flavor and the image to be used, the secirity
+groups and networks that are needed for the server and a keypair that
+will be used to connect to the server in the future, along with a
+floating IP address. A minimal definition of the server used in the
+project is shown in the appendix.
+
+\item \textbf{Networks}: Openstack allows users to set up their own
+networks for their virtual machines, and alows them to create new VMs
+that use these networks. Networks can be internal or external and can
+have subnets created by the user. A minimal definition of the network
+object is given in the appendix.
+
+\item \textbf{Subnet}: Subnets allow users to identify and separate
+different parts of their openstack networks. A subnet object should
+contain a list of DNS servers and shoud identify whether it has a DHCP
+server or not.  A minimal definition of the subnet oject is given in
+the appendix.
+\end{itemize}
+
+
+
+
+%%  describe REST API, and swagger and importance of REST 2 pages
+%% \item define all openstack terms and how it works 2-3 pages pages
+%% \item define approach and objects used used for the project
+%%       and the object specification used IN VERBATIM 2 pages
+%% \item describe the problems faced in the approach
+%% \item describe openstack container management ?
+%% \item install and try the container management from REST API ?
+%% \item add images etc of how it works
+%% \item add verbatim code for object definition
+
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
