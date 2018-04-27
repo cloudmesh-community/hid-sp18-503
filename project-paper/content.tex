@@ -39,7 +39,7 @@ infrastructure and is constantly improving. It provides an openstack
 python software development toolkit (sdk) that contains python APIs
 for openstack services along with command line tools that allow users
 to write python code to remotely perform actions on the openstack
-cloud
+cloud.
 
 Representational State Transfer (REST) is an architectural standard
 for web applications that allows different applications to comunicate
@@ -49,12 +49,11 @@ interface to the server. REST is highly scalable and easy to
 extend~\cite{hid-sp18-503-REST}. The NIST Big Data Reference
 Architecture defines standard properties for objects that that are
 important to Big Data echosystem.
-%~\cite{}.
+
 These objects can be easily accessed or transferred with the use of
 RESTful Applications that use REST verbs (GET, PUT, POST, UPDATE,
 DELETE) to manipulate these objects~\cite{hid-sp18-503-REST}.
 
-%\cite{}
 We aim to develop a REST service with the help of Swagger - a tool
 that converts a yml specification to code - that can be used by other
 applications to setup and manage Virtual Machines on openstack.
@@ -131,8 +130,45 @@ functionality in the openstack SDK, which will be included in the near
 future~\cite{hid-sp18-503-openstack-sdk}.
 \end{itemize}
 
-%\section{Openstack SDK}
+\section{Openstack SDK}
+The openstack SDK is a client library that alows users, and
+applications to interact with openstack services. It aims at providing
+all of the functionality that is provided by the services along with
+proper documentation and examples. The SDK provides an abstraction
+layer that abstracts away the complxities of the differences in
+specific openstack deployments, while also providing service specific
+tools when complex functions are to be
+performed~\cite{hid-sp18-503-openstack-sdk-history}.
 
+The openstack SDK was built initially from three different libraries-
+shade, os-client-config and python-openstacksdk. Shade was initially a
+part of the openstack nodepool project with some of its code written
+inside the Ansible openstack module. It was later consolidated and
+moved into \emph{openstack.cloud} module. The os-client-config was a
+library written to gather the configuration information from different
+deployments in a consistent manner. This was moved
+to \emph{openstack.config} module which now reads the configuration
+from the \emph{clouds.yaml} file (if available). The
+python-openstacksdk was a library that exposed the API to
+developers~\cite{hid-sp18-503-openstack-sdk-history}.
+
+
+The sdk can be eaily installed from the Python Pagkage Index (PyPI)
+using the command:
+
+\begin{verbatim}
+pip install openstacksdk
+\end{verbatim}
+
+The sdks for the individual services, if needed can be installed
+similarly using pip as follows:
+
+\begin{verbatim}
+pip install python-PROJECTclient
+\end{verbatim}
+
+where PROJECT should be replaced with the name of the partcular
+service (such as nova)
 
 \section{Object Definitions}
 The objects that are used in this project are inspired by the objects
