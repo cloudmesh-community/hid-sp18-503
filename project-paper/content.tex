@@ -144,15 +144,17 @@ The openstack SDK was built initially from three different libraries-
 shade, os-client-config and python-openstacksdk. Shade was initially a
 part of the openstack nodepool project with some of its code written
 inside the Ansible openstack module. It was later consolidated and
-moved into \emph{openstack.cloud} module. The os-client-config was a
-library written to gather the configuration information from different
-deployments in a consistent manner. This was moved
-to \emph{openstack.config} module which now reads the configuration
-from the \emph{clouds.yaml} file (if available). The
+moved into \emph{openstack.cloud} module. The philosophy from nodepool
+allows the users to change clouds they want to connect to in their
+code, without worrying much about the differences. The
+os-client-config was a library written to gather the configuration
+information from different deployments in a consistent manner. This
+was moved to \emph{openstack.config} module which now reads the
+configuration from the \emph{clouds.yaml} file (if available). The
 python-openstacksdk was a library that exposed the API to
 developers~\cite{hid-sp18-503-openstack-sdk-history}.
 
-
+\subsection{Installing the SDK}
 The sdk can be eaily installed from the Python Pagkage Index (PyPI)
 using the command:
 
@@ -169,6 +171,18 @@ pip install python-PROJECTclient
 
 where PROJECT should be replaced with the name of the partcular
 service (such as nova)
+
+To use the openstack sdk, and communicate with a cloud, first a
+connection must be created to the cloud. This can be done either by
+using a clouds.yaml file or by explicitly passing the variables to
+the \emph{openstack.connect\(\)} method. Once a connection is made, the
+application can communicate to different services using the openstack
+sdk. These services are included in the modules named based on the
+service functionality for simplicity for users not familiar with
+openstack terminology. The neutron servce is abstracted in the
+module \emph{openstack.network}, the nova service
+to \emph{openstack.compute} module, the keystone service
+to \emph{openstack.identity} module and so on.
 
 \section{Object Definitions}
 The objects that are used in this project are inspired by the objects
