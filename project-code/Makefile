@@ -6,8 +6,8 @@ SPEC=devstack.yml
 DB=${mongo_path}
 DB_NAME=cloudmesh_vdir_db
 SERVICE_NAME=cloudmesh_vdir_service
-#swagger_codegen=java -jar swagger-codegen-cli.jar
-swagger_codegen=java -jar ~/swagger/swagger-codegen-cli-2.3.1.jar
+swagger_codegen=java -jar swagger-codegen-cli.jar
+#swagger_codegen=java -jar ~/swagger/swagger-codegen-cli-2.3.1.jar
 
 all: fetch generate requirements
 	@echo "DONE"
@@ -46,7 +46,6 @@ generate:
 		-o server/devstack/flaskConnexion \
 		-D supportPython2=true 
 	@echo "generated code"
-copy:
 	cp *_controller.py server/devstack/flaskConnexion/swagger_server/controllers/
 	cp clouds.yaml server/devstack/flaskConnexion/
 	@echo "copied"
