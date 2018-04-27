@@ -19,7 +19,7 @@
 Openstack is one of the most important cloud coputing Infrastructure
 as a Service that allows users to setup and manage servers easily. It
 provides APIs that help users to manage these services through
-command-line and through code. The NIST Big Data Reference 
+command-line and through code. The NIST Big Data Reference
 Architecture defines a reference architecture for various objects that
 are important in the context of cloud computing. In this project we
 aim to build a REST service using these object specifications that
@@ -72,49 +72,72 @@ users viewpoit and are described below:
 
 \begin{itemize}
 \item \textbf{Keystone}: Keystone is the identity management system for
-openstack. It is this service that generates authentication tokens a and
-identifies users with the help of passwords and provides the need for
-users to identify themselvs in their applications. Keystone can be
-integrated with third party services such as Lightweight Directory
-Access Protocol (LDAP)
+openstack. It is responsible for authentication and high level
+authorization.  It is this service that generates authentication
+tokens a and identifies users with the help of passwords and provides
+the need for users to identify themselvs in their
+applications. Keystone can be integrated with third party services
+such as Lightweight Directory Access Protocol
+(LDAP)~\cite{hid-sp18-503-oracle-openstack}
+\cite{hid-sp18-503-keystone}.
 
 \item \textbf{Nova}: Nova is the compute service from Openstack, and is
-responsible for the management, creation and deletion of virtual machines.
-Nova allows administrators to choose the hypervisor of their choice while
-providing a common API to manage VMs
+responsible for the management, creation and deletion of virtual
+machines with the help of various daemons running on linux.  Nova
+allows administrators to choose the hypervisor of their choice while
+providing a common API to manage VMs. Nova requires Keystone, Glance
+and Neutron to work~\cite{hid-sp18-503-oracle-openstack}
+\cite{hid-sp18-503-nova}.
 
 \item \textbf{Glance}: The service responsible for managing and cataloging
-images that are uploaded by the users.
+images that are uploaded by the users. Glance was built to be the
+store for objects required by other services, and the support fot
+other objects can be added later~\cite{hid-sp18-503-oracle-openstack}
+\cite{hid-sp18-503-glance}.
 
 \item \textbf{Neutron}: Neutron is a networking service provided by openstack.
-It is responsible for creating networks between VMs and for ensuring various
-network services available to the user.
+It is responsible for creating networks between VMs and in addition
+includes a firewall, load ballancer, and allows users to create
+Virtual Private Networks.  Neutron providesvarious virtual
+abstractions such as subnets and routers which work in the same manner
+as the physical devices
+\cite{hid-sp18-503-oracle-openstack}
+\cite{hid-sp18-503-neutron}.
 
-\item \textbf{Cinder}: Cinder is the service responsible for managing the
-external storage including external volumes and Network File storage (NFS).
-It allows vendors to create specialized plucins for their devices.
+\item \textbf{Cinder}: Cinder is the openstck \emph{block storage as a service}
+responsible for managing the external storage including external
+volumes and Network File storage (NFS). It is highly availabe, fault
+taulerant and is easily recoverable after failures
+\cite{hid-sp18-503-cinder}.
 
 \item \textbf{Heat}: Heat is the cloud orchestration layer on opestack. It
-is responsible for providing Floating IPs, managing security groups, servers
-and many other services.
+is responsible for providing Floating IPs, managing security groups,
+servers and many other services. Heat allows all this to be done with
+the help of a template file defined by the user that allows Heat to
+execute the correct API calls to provision the specied
+cloud~\cite{hid-sp18-503-oracle-openstack}
+\cite{hid-sp18-503-heat}.
 
 \item \textbf{Horizon}: Horizon is the Graphical User Interface (GUI) dashboard
-that allows users to conect to openstack and manage their cloud using their
-web browsers. 
+that allows users to conect to openstack and and access openstack
+services using their web browsers~\cite{hid-sp18-503-oracle-openstack}
+\cite{hid-sp18-503-horizon}.
 
 Openstack provides differnet clients for each of these services that
 can be installed individually as needed. They provide a common unified
 API with the help of the openstack SDK that allows users to access
 most of thse sevices. Some of the services do not have complete
 functionality in the openstack SDK, which will be included in the near
-future
-
+future~\cite{hid-sp18-503-openstack-sdk}.
 \end{itemize}
-%% https://docs.oracle.com/cd/E64747_01/E64749/html/
-   %%osusg-openstack-services.html
-%% each service serparately + last 
+
+%\section{Openstack SDK}
+
+
 \section{Object Definitions}
-The objects that are used in this project are inspired by the objects defined in the Nist Big Data Reference Architecture NIST (BDRA) document and are listed below:
+The objects that are used in this project are inspired by the objects
+defined in the Nist Big Data Reference Architecture NIST (BDRA)
+document and are listed below:
 
 \begin{itemize}
 \item \textbf{Image}: An Image defines what types of operating systems are
@@ -158,19 +181,6 @@ contain a list of DNS servers and shoud identify whether it has a DHCP
 server or not.  A minimal definition of the subnet oject is given in
 the appendix.
 \end{itemize}
-
-
-
-
-%%  describe REST API, and swagger and importance of REST 2 pages
-%% \item define all openstack terms and how it works 2-3 pages pages
-%% \item define approach and objects used used for the project
-%%       and the object specification used IN VERBATIM 2 pages
-%% \item describe the problems faced in the approach
-%% \item describe openstack container management ?
-%% \item install and try the container management from REST API ?
-%% \item add images etc of how it works
-%% \item add verbatim code for object definition
 
 
 \bibliographystyle{ACM-Reference-Format}
