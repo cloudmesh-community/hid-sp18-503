@@ -10,6 +10,7 @@
      	make clean
 
 * The APIs available are:
+
       GET: /cloudmesh/openstack/flavors: List all flavors
       GET: /cloudmesh/openstack/images: List all images
       GET: /cloudmesh/openstack/image/{name}: List image with the given name
