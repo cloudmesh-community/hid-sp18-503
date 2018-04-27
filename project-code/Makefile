@@ -1,50 +1,65 @@
-#
-# Naturally you need to adapt this to make work for your project
-#
+# assumes swager_codegen environment variable contains
+# the path to swagger codegen jarfile
 
-all:
-	@echo "create a useful makefile that makes it easy to run your code"
-	@echo "make sure your data is downloaded from the intenet"
 
-data:
-	@echo "wget or curl your data from the internet"
+SPEC=devstack.yml
+DB=${mongo_path}
+DB_NAME=cloudmesh_vdir_db
+SERVICE_NAME=cloudmesh_vdir_service
+#swagger_codegen=java -jar swagger-codegen-cli.jar
+swagger_codegen=java -jar ~/swagger/swagger-codegen-cli-2.3.1.jar
+
+all: fetch generate requirements
+	@echo "DONE"
+
+docker-build:
+	@echo "BUILDING IMAGE"
+	docker build . -t cloudmesh/virtualdirectory
+	@echo "IMAGE BUILT SUCCESSFULLY"
+
+docker-start:
+	docker pull mongo
+	docker run --name  $(DB_NAME) \
+	--volume $(DB):/data/db -p 27017:27017 -d mongo
+
+	@echo "mongodb running inside container 'db' mapped \
+	to port 27017"
+
+	docker run --name  $(SERVICE_NAME) \
+	-p 8080:8080 -d cloudmesh/virtualdirectory
+
+	@echo "service running inside container 'service' \
+	mapped to port 8080 of host"
+
+docker-stop:
+	docker stop $(DB_NAME)
+	docker stop $(SERVICE_NAME)
+fetch:
+	wget http://central.maven.org/maven2/io/swagger/\
+	swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar \
+	-O swagger-codegen-cli.jar
 
 generate:
-	@echo "create VM and install devstack"
-	@echo "installing python sdk on client"
-	@echo "generate swagger code such"
+	$(swagger_codegen) generate \
+		-i $(SPEC) \
+		-l python-flask \
+		-o server/devstack/flaskConnexion \
+		-D supportPython2=true 
+	@echo "generated code"
+copy:
+	cp *_controller.py server/devstack/flaskConnexion/swagger_server/controllers/
+	cp clouds.yaml server/devstack/flaskConnexion/
+	@echo "copied"
+run:
+	cd server/devstack/flaskConnexion &&\
+	python -m swagger_server
 
-install: install-swagger install-mongo
-	@echo "install your code so it can be used on the system it is supposed to run"
-	@echo "you could have multiple installs so we giva na exampel"
+requirements:
+	pip install -r requirements.txt
+	cd server/devstack/flaskConnexion; pip install -r requirements.txt
 
-install-swagger:
-	@echo "install your swagger services"
-
-install-mongo:
-	@echo "install your mongo services - this is just an example, you may not use mongo"
-
-start: start-swagger start-mongo
-	@echo "start your code so it can be used on the system it is supposed to run"
-	@echo "you could have multiple starts so we giva na exampel"
-
-start-swagger:
-	@echo "start your swagger services"
-
-stop-mongo:
-	@echo "stop your mongo services - this is just an example, you may not use mongo"
-
-stop: stop-swagger stop-mongo
-  @echo "stop your code so it can be used on the system it is supposed to run"
-	@echo "you could have multiple stops so we giva na exampel"
-
-stop-swagger:
-	@echo "stop your swagger services"
-
-stop-mongo:
-	@echo "stop your mongo services - this is just an example, you may not use mongo"
-
-test:
-	@echo "test your service"
-
-
+clean:
+	rm -rf server/
+	rm swagger-codegen-cli.jar
+	docker rm $(DB_NAME)
+	docker rm $(SERVICE_NAME)
