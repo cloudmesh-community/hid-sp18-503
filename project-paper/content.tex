@@ -96,7 +96,8 @@ other objects can be added later~\cite{hid-sp18-503-oracle-openstack}
 
 \item \textbf{Neutron}: Neutron is a networking service provided by openstack.
 It is responsible for creating networks between VMs and in addition
-includes a firewall, load ballancer, and allows users to create
+includes a firewall, load ballancer, and allows users to
+create
 Virtual Private Networks.  Neutron providesvarious virtual
 abstractions such as subnets and routers which work in the same manner
 as the physical devices
@@ -249,6 +250,56 @@ server or not.  A minimal definition of the subnet oject is given in
 the appendix.
 \end{itemize}
 
+\subsection{Available Endpoints}
+To run the application move into the project directory and provide
+correct credetnials in the clouds.yml file, thenrun the
+following code in the terminal:
+\begin{verbatim}
+make
+make run
+\end{verbatim}
+The \emph{make} command downloads \emph{swagger-codegen} jarfile, runs
+swagger-codegen to generate the python stub for the project, and
+copies the \emph{clouds.yml} and \emph{default\_controler.py} files at
+the right place. The \emph{make run} command starts the server at
+localhost on port 8080.
+
+The objects defined for this project can be accessed through REST API, as
+follows:
+\begin{itemize}
+\item \textbf{GET:} /cloudmesh/openstack/flavors: returns a list of all
+flavors
+that are available. It uses the openstack.compute module to perform this
+function.
+
+\item \textbf{GET:} /cloudmesh/openstack/images: returns a list of all
+available images. It again uses the openstack.compute module to perform this
+function.
+
+\item \textbf{GET:} /cloudmesh/openstack/image/{name}: returns the image
+with the specified name if there exists one.
+
+\item \textbf{GET:} /cloudmesh/openstack/networks: returns a list of all
+available networks. It uses openstack.network module for this API call, which
+communicates to the openstack neutron service.
+
+\item \textbf{GET:} /cloudmesh/openstack/networks/subnets: returns a list of
+all subnets available to the user.
+
+\item \textbf{GET:} /cloudmesh/openstack/keypairs: returns a list of keypairs
+that can be used by a user. The openstack.identity modulewas used for this
+function which in turn communicates to the keystone service.
+
+\item \textbf{GET:} /cloudmesh/openstack/servers: returns a list of servers
+(Virtual Machines) that are available on the openstack cloud
+
+\item \textbf{POST:} /cloudmesh/openstack/server/start: start the server with
+the given name, if the server (Virtual Machine) is present on the cloud.
+
+\item \textbf{POST:} /cloudmesh/openstack/server/stop: stop the server with
+the given name, if the server (Virtual Machine) is present on the cloud
+
+\end{itemize}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
