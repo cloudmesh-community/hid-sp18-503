@@ -33,7 +33,7 @@ help users complete an openstack deployment easily.
 
 \section{Introduction}
 Openstack is a free and open source cloud Infrastructure as a Service
-that allows users to set up resources such as virtual servers for
+(IaaS) that allows users to set up resources such as virtual servers for
 their customers. It is one of the most widely deployed cloud
 infrastructure and is constantly improving. It provides an openstack
 python software development toolkit (sdk) that contains python APIs
@@ -275,31 +275,65 @@ function.
 \item \textbf{GET:} /cloudmesh/openstack/images: returns a list of all
 available images. It again uses the openstack.compute module to perform this
 function.
-
 \item \textbf{GET:} /cloudmesh/openstack/image/{name}: returns the image
 with the specified name if there exists one.
-
 \item \textbf{GET:} /cloudmesh/openstack/networks: returns a list of all
 available networks. It uses openstack.network module for this API call, which
 communicates to the openstack neutron service.
-
 \item \textbf{GET:} /cloudmesh/openstack/networks/subnets: returns a list of
 all subnets available to the user.
-
 \item \textbf{GET:} /cloudmesh/openstack/keypairs: returns a list of keypairs
 that can be used by a user. The openstack.identity modulewas used for this
 function which in turn communicates to the keystone service.
-
 \item \textbf{GET:} /cloudmesh/openstack/servers: returns a list of servers
 (Virtual Machines) that are available on the openstack cloud
-
 \item \textbf{POST:} /cloudmesh/openstack/server/start: start the server with
 the given name, if the server (Virtual Machine) is present on the cloud.
-
 \item \textbf{POST:} /cloudmesh/openstack/server/stop: stop the server with
 the given name, if the server (Virtual Machine) is present on the cloud
 
 \end{itemize}
 
+\subsection{Significance}
+The Openstack services usuallly provide various endoints that support
+various REST API calls, but using these endpoints requires knowldge of
+openstack terminology and the knowledge of how these APIs should be
+used which can be complicated. Further there exist various vendors who
+provide openstack clouds as a service, and openstack allows
+administrators to make changes in how they want to deploy their cloud
+services, and thus the usage of endpoints for these services may
+differ across different openstack clouds. In such situations an
+application like ours provdes another layer of abstraction to the API
+and can allow users to use the same minimal API to manage various
+diffeent deployments of openstack.
+
+Most cloud providers do not enforce user privilleges on the
+kinds of applications that can be run by a user in a VM. Adding
+another layer of abstraction can allow administrators to control, for
+instance, which users can install which softwares on these VMs, in an
+organizational setting where these softwares may be lisenced and
+expensive.
+
+\section{Conclusion}
+Openstack is an open source cloud IaaS and provides the openstack SDK
+that allows applications and users to commmunicate to the
+cloud. Swagger codegen is a tool that alllows quick development of
+software with the help of a yaml file that is written following the
+openAPI standard. Using the swagger spcification for some of the
+objects required for big data ecosystem, applications can be easily
+developed that use these objects. There exist various definitions of
+these objects, but it is important to develop an open standard that
+must be followed for consistency across applications.
+
+\section{Improvements}
+We define a basic application that uses the openAPI swagger specification
+for some of the objects that are required in a cloud based
+ecoystem. The project can be extended to include various other cloud services
+that are commonly used, while maintaining the same REST API.
+
+The project API can be extended to provide services and functions that
+can be used to perform various actions, such as a Machine Learning API uses a
+trained model to allow users to autogenerate image captions
+\cite{hid-sp18-503-image-cap}
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
