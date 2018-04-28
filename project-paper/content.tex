@@ -184,7 +184,24 @@ module \emph{openstack.network}, the nova service
 to \emph{openstack.compute} module, the keystone service
 to \emph{openstack.identity} module and so on.
 
-\section{Object Definitions}
+\section{Approach}
+
+The project uses all the technological concepts defined above. It
+comprses of a REST API developed from the openAPI specification that
+was used to generate code using \emph{swager-codegen}. This allowed us
+to easily make updates and changes to the yaml structure without
+having to manually change a lot of the code.
+
+The project in its entirity comprises of three parties - the openstack
+cloud (\emph{chameleoncloud} in this case), The server running the
+REST API (\emph{swagger server}) and client. The client issues API
+calls to the endpoints on the swagger server, which in turn uses the
+openstack sdk to communicate to the cloud. The specification of the
+objects that is defined in the \emph{devstack.yml} swagger
+specification file drives how these API calls are made, and thus is
+the most important part of the process. 
+
+\subsection{Object Definitions}
 The objects that are used in this project are inspired by the objects
 defined in the Nist Big Data Reference Architecture NIST (BDRA)
 document and are listed below:
