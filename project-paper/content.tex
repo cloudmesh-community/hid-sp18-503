@@ -185,6 +185,31 @@ module \emph{openstack.network}, the nova service
 to \emph{openstack.compute} module, the keystone service
 to \emph{openstack.identity} module and so on.
 
+\section{Swagger}
+Swagger is an opensource set of tools for creatin APIs from openAPI
+specifications. Swagger project was initially owned by SmartBear and
+later donated to the linx foundation marking the start of the openAPI
+standard. Swagger follows an API first philosophy and simplifies the
+process of writing APIs for new and existing applications.
+The Swagger
+toolkit consists of various applications that include Swagger Codegen,
+Swagger Core, Swagger UI, Swagger Editor and Swagger Hub. While
+Swagger Codegen helps to build code stubs from the openAPI
+specificaton in many languages, the Swagger Inspector helps users to build
+openAPI Specifications from any API in the browser.
+The swagger community is separated from the openAPI comunity and
+focuses on building tools that can be used by the developers to build
+applications from the openAPI specification~\cite{hid-sp18-503-swagger}.
+
+The openAPI specification is a standard and simple way to define an
+API that allows users to understand the functionality without having
+to read throughthe documentation od the entire
+code~\cite{hid-sp18-503-swagger-openapi}.
+
+The openAPI standard allows specifications to be written in both yaml
+and JSON format. The API may include many differnet objects that can
+be defined in one file or in separate linked
+files~\cite{hid-sp18-503-swagger-openapi}. 
 \section{Approach}
 
 The project uses all the technological concepts defined above. It
@@ -334,6 +359,6 @@ that are commonly used, while maintaining the same REST API.
 The project API can be extended to provide services and functions that
 can be used to perform various actions, such as a Machine Learning API uses a
 trained model to allow users to autogenerate image captions
-\cite{hid-sp18-503-image-cap}
+\cite{hid-sp18-503-image-cap}.
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{report} 
