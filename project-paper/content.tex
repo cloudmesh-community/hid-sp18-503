@@ -64,6 +64,29 @@ keypairs, networks, and subnets. Each of these objects should be
 accessible from the REST application, so that they can be updated and
 stored as necessary.
 
+\section{NIST Big Data Reference Architecture}
+The field of big data is relatively new and there are many definitions
+of what big data technologies are. NIST Big Data Public Working Group
+(PWG) has been working on formalizing a standard of what consitutes a
+Big data ecosystem and what are the components that are needed to
+define and setup such an ecosystem. These components have been defined
+in the NIST Big Data Reference Architecture (NBDRA) reference
+architecture document (Volume 6). In order to facilitate communication
+between these components, there is the need for a comon well defined
+interface, that has been defined in the Big Data Ineroperability
+Framework document (Volume 8)
+\cite{hid-sp18-503-BDRA}.
+
+The document identifies what are the different requirements that such
+an interface should satisfy. The interfaces should be vendor agnostic,
+be reusable in different case specific scenarios and should allow
+users to plug in resources as needed. The document investigates the
+requirements of different stakeholders in a big data ecosystem and
+aims to develop a specification paradigm that fulfils most of these
+requirements. The document proposes speciications for various objects
+that are required for a big data ecosystem to function properly and
+provides examples of these specifications~\cite{hid-sp18-503-BDRA}. 
+
 \section{Openstack Services}
 Openstack consists of various services that are responsible for
 different operations. Each of htese services are important from a
