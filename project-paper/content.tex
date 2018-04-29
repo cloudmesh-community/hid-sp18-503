@@ -1,7 +1,7 @@
 % status: 30
 % chapter: TBD
 
-\title{Swager Service for an Openstack Deployment}
+\title{Swagger Service for an Openstack Resources}
 
 
 \author{Arnav Arnav}
@@ -64,7 +64,45 @@ keypairs, networks, and subnets. Each of these objects should be
 accessible from the REST application, so that they can be updated and
 stored as necessary.
 
-\section{Openstack Services}
+\section{NIST Big Data Reference Architecture}
+The field of big data is relatively new and there are many definitions
+of what big data technologies are. NIST Big Data Public Working Group
+(PWG) has been working on formalizing a standard of what consitutes a
+Big data ecosystem and what are the components that are needed to
+define and setup such an ecosystem. These components have been defined
+in the NIST Big Data Reference Architecture (NBDRA) reference
+architecture document (Volume 6). In order to facilitate communication
+between these components, there is the need for a comon well defined
+interface, that has been defined in the Big Data Ineroperability
+Framework document (Volume 8)
+\cite{hid-sp18-503-BDRA}.
+
+The document identifies what are the different requirements that such
+an interface should satisfy. The interfaces should be vendor agnostic,
+be reusable in different case specific scenarios and should allow
+users to plug in resources as needed. The document investigates the
+requirements of different stakeholders in a big data ecosystem and
+aims to develop a specification paradigm that fulfils most of these
+requirements. The document proposes speciications for various objects
+that are required for a big data ecosystem to function properly and
+provides examples of these specifications~\cite{hid-sp18-503-BDRA}. 
+
+\section{Openstack}
+% detailed definition of openstack
+
+Openstack is an opensource cloud Infrastructure as a Service platform
+oiginally built by the colaboration of NASA and Rackspace hosting and
+is now maintained by Rackspace. The platform consists of various
+components that allow users to contro diverse multi-vendor computing
+and storage hardware with the help of web based user interface or
+through applications with the hellp of APIs.
+The Project was started in 2010 with the aim of creating an opensource
+platforms that would help organizations offer cloud services on
+standard hardware. The openstack community has grown to an active
+collaboration of more than 500 companies and works around a six month
+cycle with frequentmilestones~\cite{hid-sp18-503-openstack-wiki}.
+
+\subsection{Openstack Services}
 Openstack consists of various services that are responsible for
 different operations. Each of htese services are important from a
 users viewpoit and are described below:
