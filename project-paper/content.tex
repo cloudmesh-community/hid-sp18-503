@@ -1,4 +1,4 @@
-% status: 30
+% status: 70
 % chapter: TBD
 
 \title{Swagger Service for an Openstack Resources}
@@ -236,6 +236,37 @@ ethernet and internet access. Once Devstack has been installed, it can
 be used to show and test how a new functionality wroks by using the
 Horizon interface nd through command line
 APIs~\cite{hid-sp18-503-devstack}.
+
+\subsection{Openstack Container Service}
+In addition to providing servics to users for using virtual machines
+annd virtual machine clusters, the Openstack Container Team developed
+an API called \emph{magnum} that makes container orchestration
+availale to users as an openstack resource. MAgnum cluster
+orchestration engine uses Heat orchestration that uses an operating
+system image cintaining docker and kubernetes and runs that image on a
+Virtual machine with the help of Nova. It uses Neutron to network
+kubernetes containers, uses Cinder to provide volumes for containers
+and allows users to chooese between Kubernetes, Docker and Apache
+Mesos as the cluster backend technology~\cite{hid-sp18-503-magnum-wiki}.
+
+Magnum service consists of two parts, the magnum REST service, and the
+magnum-conductor. The REST server is horizontally scalable and can
+handle many requests at a time, while the conductor process is only
+single threaded at this time. All requests are stored in a message
+queue before magnum-conductor process can work on
+them~\cite{hid-sp18-503-magnum-intro}.  All calls to the magnum
+service need to be authenticated with Keystone, and users can only see
+containers that arestarted by them. This provides an additional layer
+of security for the users. Magnum is intended for use by cloud
+providers who want to gicve users the option to create self service
+continers and container clusters just as easily as openstack Virtual
+Machines~\cite{hid-sp18-503-magnum-wiki}.
+
+The magnum comandline and python clients can be easily installed from
+Python Package Index (PyPI) using pip by running the command:
+\begin{verbatim}
+pip install python-magnumclient
+\end{verbatim}
 
 \section{Chameleon Cloud}
 Chameleon cloud is an experimental test bed for the FutureCloud
