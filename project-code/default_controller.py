@@ -13,6 +13,25 @@ import openstack
 conn = openstack.connect(cloud="cham")
 KEYFILE = "gen-keys"
 
+
+def create_key(keypair=None):  # noqa: E501
+    """create_key
+
+    create a new keypair with the sepcified name # noqa: E501
+
+    :param keypair: object specifying keypair to be created
+    :type keypair: dict | bytes
+
+    :rtype: Keypair
+    """
+    if connexion.request.is_json:
+        keypair = Keypair.from_dict(connexion.request.get_json())  # noqa: E501
+    try:
+        new_keypair = conn.compute.create_keypair(name=keypair.name)
+        return new_keypair.to_dict()
+    except:
+        return "Can't create keypair, an error occured"
+
 def create_network(network=None):  # noqa: E501
     """create_network
 
@@ -32,8 +51,8 @@ def create_network(network=None):  # noqa: E501
                                          # is_router_external =
                                          # network.is_router_external)
     return new_network.to_dict()
-    # except:
-    #     return "an error occured, network could not be created"
+
+
 
 def create_server(server=None):  # noqa: E501
     """create_server
@@ -82,6 +101,24 @@ def delete_network(network=None):  # noqa: E501
     conn.network.delete_network(del_net)
     return del_net.to_dict()
 
+def delete_key(keypair=None):  # noqa: E501
+    """delete_key
+
+    delete keypair with the sepcified name # noqa: E501
+
+    :param keypair: object specifying keypair to be deleted
+    :type keypair: dict | bytes
+
+    :rtype: Keypair
+    """
+    if connexion.request.is_json:
+        keypair = Keypair.from_dict(connexion.request.get_json())  # noqa: E501
+    del_key = conn.compute.find_keypair(keypair.name)
+    if not del_key:
+        return "can't find keypair"
+
+    conn.compute.delete_keypair(del_key)
+    return del_key.to_dict()
 
 def get_flavors():  # noqa: E501
     """get_flavors
