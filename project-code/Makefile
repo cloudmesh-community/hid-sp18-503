@@ -52,3 +52,47 @@ clean:
 	rm -rf server/
 	rm swagger-codegen-cli.jar
 	docker rm $(SERVICE_NAME)
+
+test-get-flavors:
+	curl http://localhost:8080/cloudmesh/openstack/flavors
+test-get-images:
+	curl http://localhost:8080/cloudmesh/openstack/images
+test-get-image-by-name:
+	curl http://localhost:8080/cloudmesh/openstack/image/CC-Ubuntu16.04
+test-get-servers:
+	curl http://localhost:8080/cloudmesh/openstack/servers
+test-server-start:
+	curl -H "Content-Type:application/json" -d '{"name": "${SERVER_NAME}", "flavour": "1",	"image": "59876aa4-4d5e-4037-a7be-088998e53e6b", "keypair":"gen-keys",  "network":"dbf29083-ff90-406e-b69a-b1d93b8f0a2d"}' http://localhost:8080/cloudmesh/openstack/server/start
+
+test-server-stop:
+
+	curl -H "Content-Type:application/json"  -d '{"name": "${SERVER_NAME}", "flavour": "1", "image": "59876aa4-4d5e-4037-a7be-088998e53e6b","keypair":"gen-keys", "network":"dbf29083-ff90-406e-b69a-b1d93b8f0a2d"}' http://localhost:8080/cloudmesh/openstack/server/stop
+
+test-server-create:
+	curl -H "Content-Type:application/json"  -d '{"name": "test-vm-503", "flavour": "1", "image": "59876aa4-4d5e-4037-a7be-088998e53e6b","keypair":"gen-keys", "network":"dbf29083-ff90-406e-b69a-b1d93b8f0a2d"}' http://localhost:8080/cloudmesh/openstack/server/create
+
+test-get-networks:
+	curl http://localhost:8080/cloudmesh/openstack/networks
+test-create-network:
+	curl -H "Content-Type:application/json"  \
+	-d '{"name": "test-net"}' \
+	http://localhost:8080/cloudmesh/openstack/network/create
+test-delete-network:
+	curl -H "Content-Type:application/json"  \
+	-d '{"name": "test-net"}' \
+	http://localhost:8080/cloudmesh/openstack/network/delete \
+	-X DELETE
+
+test-get-subnets:
+	curl http://localhost:8080/cloudmesh/openstack/networks/subnets
+test-get-keypairs:
+	curl http://localhost:8080/cloudmesh/openstack/keypairs
+test-create-keypair:
+	 curl -H "Content-Type:application/json"  \
+	-d '{"name": "test-key"}' \
+	http://localhost:8080/cloudmesh/openstack/keypair/create
+test-delete-keypair:
+	 curl -H "Content-Type:application/json"  \
+	-d '{"name": "test-key"}' \
+	http://localhost:8080/cloudmesh/openstack/keypair/delete \
+	-X DELETE
