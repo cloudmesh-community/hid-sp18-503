@@ -1,15 +1,58 @@
-### Swagger service for openstack
+## Swagger service for openstack
 
-* Use the Makefile to start the service
+### Starting the service with the help of docker
+
+* To start the service using Docker first build the docker image
+  and start the service:
+  
+  		make docker-build
+	
+		make docker-start
+
+* To stop the servive run the command:
+
+     	  make docker-stop
+
+* To remove the containers created and clean the directory run
+
+     	    make-clean
+
+### Testing with the help of docker
+The following commands should be used to test the various endpoints
+
+* **make test-get-flavors**: get a list of all available flavors
+* **make test-get-images**: get a list of all available images
+* **make test-get-image-by-name**: get the image *CC-ubuntu16.04*
+* **make test-get-keypairs**: get a list of all available keypairs
+* **make test-get-networks**: get a list of all available networks
+* **make test-get-subnets**: get a list of all available flavors
+* **make test-get-servers**: get a list of all available servers
+
+* **make test-create-keypair**: create a new keypair named *test-key*
+* **make test-create-network**: create a new network named *test-net*
+
+* **make test-delete-keypair**: delete the keypair named *test-key*
+* **make test-delete-keypair**: create the network named *test-net*
+
+To test server commands run
+   export SERVER_NAME=<name_of_server>
+   
+
+* **make test-server-start**: start the server with name $(SERVER_NAME)
+* **make test-server-stop**: stop the server with name $(SERVER_NAME)
+* **make test-server-create**: create a new server with name $(SERVER_NAME)
+
+* Use the Makefile to start the service without docker
   This will install all requirements and fetch swagger-codegen
+  
         make
-	make run
+		make run
 
 * To clean the directory run 
 
      	make clean
 
-* The APIs available are:
+* The endpoints available are:
 
       GET: /cloudmesh/openstack/flavors: List all flavors
       GET: /cloudmesh/openstack/images: List all images
@@ -27,3 +70,10 @@
 
       POST: /cloudmesh/openstack/server/start : start the server with given name
       POST: /cloudmesh/openstack/server/stop : stop the server with given name
+      POST: /cloudmesh/openstack/network/create : create a new network with
+      	    specified name
+      POST: /cloudmesh/openstack/keypair/create : create a new compute keypair
+      	    with the given name
+      DELETE: /cloudmesh/openstack/network/delete : delete a specified network
+      DELETE: /cloudmesh/openstack/keypair/delete : delete a keypair with the
+      	      given name
