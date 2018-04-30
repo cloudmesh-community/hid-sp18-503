@@ -5,7 +5,8 @@
 * To start the service using Docker first build the docker image
   and start the service:
   
-  	make docker-build
+  		make docker-build
+	
 		make docker-start
 
 * To stop the servive run the command:
