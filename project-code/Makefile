@@ -3,9 +3,7 @@
 
 
 SPEC=devstack.yml
-DB=${mongo_path}
-DB_NAME=cloudmesh_vdir_db
-SERVICE_NAME=cloudmesh_vdir_service
+SERVICE_NAME=cloudmesh_openstack_service
 swagger_codegen=java -jar swagger-codegen-cli.jar
 #swagger_codegen=java -jar ~/swagger/swagger-codegen-cli-2.3.1.jar
 
@@ -14,25 +12,18 @@ all: fetch generate requirements
 
 docker-build:
 	@echo "BUILDING IMAGE"
-	docker build . -t cloudmesh/virtualdirectory
+	docker build . -t cloudmesh/openstack
 	@echo "IMAGE BUILT SUCCESSFULLY"
 
 docker-start:
-	docker pull mongo
-	docker run --name  $(DB_NAME) \
-	--volume $(DB):/data/db -p 27017:27017 -d mongo
-
-	@echo "mongodb running inside container 'db' mapped \
-	to port 27017"
 
 	docker run --name  $(SERVICE_NAME) \
-	-p 8080:8080 -d cloudmesh/virtualdirectory
+	-p 8080:8080 -d cloudmesh/openstack
 
 	@echo "service running inside container 'service' \
 	mapped to port 8080 of host"
 
 docker-stop:
-	docker stop $(DB_NAME)
 	docker stop $(SERVICE_NAME)
 fetch:
 	wget http://central.maven.org/maven2/io/swagger/\
@@ -60,5 +51,4 @@ requirements:
 clean:
 	rm -rf server/
 	rm swagger-codegen-cli.jar
-	docker rm $(DB_NAME)
 	docker rm $(SERVICE_NAME)
