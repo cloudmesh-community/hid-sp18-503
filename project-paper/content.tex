@@ -1,4 +1,4 @@
-% status: 80
+% status: 100%
 % chapter: Openstack Cloud
 \title{Swagger Service for an Openstack Resources}
 
@@ -433,7 +433,24 @@ cloud.
 the given name, if the server (Virtual Machine) is present on the
 cloud
 
+\item \textbf{POST:} /cloudmesh/openstack/keypair/create: create a new keypair
+ for the nova service with the name specified in the request body
+
+\item \textbf{POST:} /cloudmesh/openstack/network/create: create a new network
+ with the name specified in the request body
+
+\item \textbf{DELETE:} /cloudmesh/openstack/network/delete: delete the network
+ with the name specified in the request body.
+
+\item \textbf{DELETE:} /cloudmesh/openstack/keypair/delete: delete the nova
+keypair with the name specified in the request body.
+
 \end{itemize}
+
+The project uses a Dockerfile that build an image for the
+service, which builds on top of the python3 image and installs all requirements
+Docker containers are lightweight and allow us to reproduce our project on a
+new machine without worrying about the specific environments and dependencies.
 
 \subsection{Significance}
 The Openstack services usuallly provide various endoints that support
