@@ -169,7 +169,7 @@ paths:
   '/network/create':
     post:
       description: "Create a new network with the sepcified parameters"
-      operationId: create_network
+      operationId: createNetwork
       produces:
         - 'application/json'
       parameters:
@@ -180,9 +180,27 @@ paths:
             $ref: "#/definitions/Network"
       responses:
         '200':
-          description: 'returns the details of the server that was created'
+          description: 'returns the details of the network that was created'
           schema:
-            $ref: '#/definitions/Server'
+            $ref: '#/definitions/Network'
+
+  '/network/delete':
+    delete:
+      description: "Delete a new network with the sepcified name"
+      operationId: deleteNetwork
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: network
+          description: "object specifying network to be deleted"
+          schema:
+            $ref: "#/definitions/Network"
+      responses:
+        '200':
+          description: 'returns the details of the server that was deleted'
+          schema:
+            $ref: '#/definitions/Network'
 
   '/keypairs':
     get:
@@ -195,6 +213,42 @@ paths:
           description: 'a list of available keypairs'
           schema:
             $ref: '#/definitions/Keypair'
+
+  '/keypair/create':
+    post:
+      description: "create a new keypair with the sepcified name"
+      operationId: createKey
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: keypair
+          description: "object specifying keypair to be created"
+          schema:
+            $ref: "#/definitions/Keypair"
+      responses:
+        '200':
+          description: 'returns the details of the keypair that was created'
+          schema:
+            $ref: '#/definitions/Keypair'
+
+  '/keypair/delete':
+    delete:
+      description: "delete keypair with the sepcified name"
+      operationId: deleteKey
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: keypair
+          description: "object specifying keypair to be deleted"
+          schema:
+            $ref: "#/definitions/Keypair"
+      responses:
+        '200':
+          description: 'returns the name of the keypair that was deleted'
+          schema:
+            $ref: "#/definitions/Keypair"
 definitions:
   Flavor:
     type: "object"
