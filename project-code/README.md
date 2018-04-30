@@ -42,8 +42,8 @@ To test server commands run
 * **make test-server-stop**: stop the server with name $(SERVER_NAME)
 * **make test-server-create**: create a new server with name $(SERVER_NAME)
 
-* Use the Makefile to start the service without docker
-  This will install all requirements and fetch swagger-codegen
+### Use the Makefile to start the service without docker
+  This will install all requirements, fetch swagger-codegen, generate the code and start the service
   
         make
 		make run
