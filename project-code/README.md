@@ -15,7 +15,7 @@
 
 * To remove the containers created and clean the directory run
 
-     	    make-clean
+     	    make clean
 
 ### Testing with the help of docker
 The following commands should be used to test the various endpoints
