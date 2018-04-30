@@ -13,6 +13,28 @@ import openstack
 conn = openstack.connect(cloud="cham")
 KEYFILE = "gen-keys"
 
+def create_network(network=None):  # noqa: E501
+    """create_network
+
+    Create a new network with the sepcified parameters # noqa: E501
+
+    :param network: object specifying network to be created
+    :type network: dict | bytes
+
+    :rtype: None
+    """
+    if connexion.request.is_json:
+        network = Network.from_dict(connexion.request.get_json())  # noqa: E501
+
+    new_network= conn.network.create_network(name = network.name)
+                                         # subnets = network.subnets,
+                                         # mtu = network.mtu,
+                                         # is_router_external =
+                                         # network.is_router_external)
+    return new_network.to_dict()
+    # except:
+    #     return "an error occured, network could not be created"
+
 def create_server(server=None):  # noqa: E501
     """create_server
 
@@ -140,12 +162,14 @@ def get_networks():  # noqa: E501
     network_list = []
     for network in conn.network.networks():
         net_dict = network.to_dict()
+        name = net_dict["name"]
         id = net_dict["id"]
         status = net_dict["status"]
         mtu = net_dict["mtu"]
         is_router_external = net_dict["is_router_external"]
         subnets = net_dict["subnet_ids"]
-        net_obj = Network(id = id,
+        net_obj = Network(name = name,
+                          id = id,
                           subnets = subnets,
                           status = status,
                           mtu = mtu,

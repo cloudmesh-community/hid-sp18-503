@@ -166,6 +166,24 @@ paths:
             items:
               $ref: '#/definitions/Subnet'
 
+  '/network/create':
+    post:
+      description: "Create a new network with the sepcified parameters"
+      operationId: create_network
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: network
+          description: "object specifying network to be created"
+          schema:
+            $ref: "#/definitions/Network"
+      responses:
+        '200':
+          description: 'returns the details of the server that was created'
+          schema:
+            $ref: '#/definitions/Server'
+
   '/keypairs':
     get:
       description: "Returns a List of available keypairs"
@@ -176,9 +194,7 @@ paths:
         '200':
           description: 'a list of available keypairs'
           schema:
-            type: 'array'
-            items:
-              $ref: '#/definitions/Keypair'
+            $ref: '#/definitions/Keypair'
 definitions:
   Flavor:
     type: "object"
@@ -249,8 +265,10 @@ definitions:
   Network:
     type: "object"
     required:
-      - "id"
+      - "name"
     properties:
+      name:
+        type: "string"
       id:
         type: "string"
       subnets:
