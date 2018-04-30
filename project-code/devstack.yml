@@ -169,7 +169,7 @@ paths:
   '/network/create':
     post:
       description: "Create a new network with the sepcified parameters"
-      operationId: create_network
+      operationId: createNetwork
       produces:
         - 'application/json'
       parameters:
@@ -180,9 +180,27 @@ paths:
             $ref: "#/definitions/Network"
       responses:
         '200':
-          description: 'returns the details of the server that was created'
+          description: 'returns the details of the network that was created'
           schema:
-            $ref: '#/definitions/Server'
+            $ref: '#/definitions/Network'
+
+  '/network/delete':
+    post:
+      description: "Delete a new network with the sepcified name"
+      operationId: deleteNetwork
+      produces:
+        - 'application/json'
+      parameters:
+        - in: body
+          name: network
+          description: "object specifying network to be deleted"
+          schema:
+            $ref: "#/definitions/Network"
+      responses:
+        '200':
+          description: 'returns the details of the server that was deleted'
+          schema:
+            $ref: '#/definitions/Network'
 
   '/keypairs':
     get:

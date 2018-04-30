@@ -57,9 +57,30 @@ def create_server(server=None):  # noqa: E501
                                                 key_name = server.keypair)
     
         new_server = conn.compute.wait_for_server(new_server)
-        return new_server
+        return new_server.to_dict()
     except:
         return "An Error Occured, Can't create server"
+
+def delete_network(network=None):  # noqa: E501
+    """delete_network
+
+    Delete a new network with the sepcified name # noqa: E501
+
+    :param network: object specifying network to be deleted
+    :type network: dict | bytes
+
+    :rtype: Network
+    """
+    if connexion.request.is_json:
+        network = Network.from_dict(connexion.request.get_json())  # noqa: E501
+
+    del_net = conn.network.find_network(network.name)
+    if not del_net:
+        return "Cant find the specified network"
+    for subnet in del_net.subnet_ids:
+        conn.network.delete_subnet(subnet)
+    conn.network.delete_network(del_net)
+    return del_net.to_dict()
 
 
 def get_flavors():  # noqa: E501
