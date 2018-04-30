@@ -4,13 +4,16 @@
 
 * To start the service using Docker first build the docker image
   and start the service:
+  
      	   make docker-build
 	   make docker-start
 
 * To stop the servive run the command:
+
      	  make docker-stop
 
 * To remove the containers created and clean the directory run
+
      	    make-clean
 
 ### Testing with the help of docker
@@ -40,8 +43,9 @@ To test server commands run
 
 * Use the Makefile to start the service without docker
   This will install all requirements and fetch swagger-codegen
-        make
-	make run
+  
+        	make
+		make run
 
 * To clean the directory run 
 
