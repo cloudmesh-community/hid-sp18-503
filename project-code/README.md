@@ -17,7 +17,7 @@
 
      	    make clean
 
-### Testing with the help of docker
+### Testing with the help of the Makefile
 The following commands should be used to test the various endpoints
 
 * **make test-get-flavors**: get a list of all available flavors
